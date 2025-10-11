@@ -1,3 +1,3 @@
 export const THEME_CONFIG = {
-    PRIMARY_COLOR: '#edcd'
+    PRIMARY_COLOR: '#33aaff'
 } as const;

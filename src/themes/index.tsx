@@ -5,7 +5,7 @@ import type {ReactNode} from "react";
 import {ConfigProvider} from "antd";
 
 // ** Configs
-import {THEME_CONFIG} from "../configs/themes";
+import {THEME_CONFIG} from "@/configs/themes";
 
 const CustomTheme = ({children}: {children: ReactNode}) => {
     return (
@@ -13,8 +13,6 @@ const CustomTheme = ({children}: {children: ReactNode}) => {
             theme={{
                 token: {
                     colorPrimary: THEME_CONFIG.PRIMARY_COLOR,
-                    borderRadius: 8,
-                    fontSize: 16,
                 },
             }}
         >

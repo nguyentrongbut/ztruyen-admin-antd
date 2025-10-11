@@ -1,23 +1,22 @@
-// ** Antd
-import {Button, Flex} from "antd";
-
 // ** Styles
 import 'antd/dist/reset.css';
 
 // ** Theme
 import CustomTheme from "@/themes";
 
+// ** Routes
+import AppRoutes from "@/routes";
+
+// ** React helmet
+import {HelmetProvider} from "react-helmet-async";
+
 function App() {
     return (
-        <CustomTheme>
-            <Flex gap="small" wrap>
-                <Button type="primary">Primary Button</Button>
-                <Button>Default Button</Button>
-                <Button type="dashed">Dashed Button</Button>
-                <Button type="text">Text Button</Button>
-                <Button type="link">Link Button</Button>
-            </Flex>
-        </CustomTheme>
+        <HelmetProvider>
+            <CustomTheme>
+                <AppRoutes/>
+            </CustomTheme>
+        </HelmetProvider>
     )
 }
 
