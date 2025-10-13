@@ -1,0 +1,26 @@
+@use "@/styles/variables";
+
+// wrapper
+$gap: 5px;
+
+// title
+$fz-title: 30px;
+$fz-first-title: 42px;
+
+.wrapper {
+  display: flex;
+  gap: $gap;
+  align-items: end;
+}
+
+.title {
+  font-size: $fz-title;
+  font-weight: bold;
+  margin-bottom: 0;
+
+  &::first-letter {
+    font-size: $fz-first-title;
+    color: var(--color-primary);
+    text-transform: uppercase;
+  }
+}

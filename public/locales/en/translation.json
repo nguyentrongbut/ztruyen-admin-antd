@@ -1,3 +1,6 @@
 {
-  "login": "Login"
+  "login": "Login",
+  "desc_login": "Ztruyen Admin Login — a system for managing comics, authors, users, and content.",
+  "copy_right_login": "Powered by nguyentrongbut",
+  "placeholder_pass_login": "Password: ztruyen.io"
 }

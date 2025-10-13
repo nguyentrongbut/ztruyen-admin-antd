@@ -1,0 +1,70 @@
+// bg
+$bg-image: "/bg-login.png";
+
+// btn
+$btn-width: 100%;
+$mt-btn: 12px;
+
+// form wrapper
+$form-width: 400px;
+
+// desc
+$desc-color: rgba(0, 0, 0, 0.65);
+$mt-desc: 12px;
+$mb-desc: 40px;
+
+// footer
+$b-footer: 10px;
+
+// group link
+$size-group-link: 10px;
+$gap-github-link: 2px;
+
+.bg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url($bg-image);
+  background-size: 100% 100%;
+  overflow: hidden;
+}
+
+.formWrapper {
+  width: $form-width;
+}
+
+.btn {
+  width: $btn-width;
+  margin-top: $mt-btn;
+}
+
+.desc {
+  width: calc($form-width + 20px);
+  color: $desc-color;
+  margin-top: $mt-desc;
+  margin-bottom: $mb-desc;
+  text-align: center;
+}
+
+.footer {
+  position: fixed;
+  bottom: $b-footer;
+}
+
+.groupLink {
+  display: flex;
+  gap: $size-group-link;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $size-group-link;
+  color: $desc-color;
+}
+
+.githubLink {
+  display: flex;
+  gap: $gap-github-link;
+  align-items: center;
+  color: $desc-color;
+}

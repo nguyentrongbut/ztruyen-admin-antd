@@ -1,3 +1,6 @@
 {
-  "login": "Đăng nhập"
+  "login": "Đăng nhập",
+  "desc_login": "Trang đăng nhập quản trị Ztruyen — hệ thống quản lý truyện tranh, tác giả, người dùng và nội dung.",
+  "copy_right_login": "Được hỗ trợ bởi nguyentrongbut",
+  "placeholder_pass_login": "Mật khẩu: ztruyen.io"
 }

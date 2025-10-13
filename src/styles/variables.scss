@@ -1,0 +1,13 @@
+// =====================
+// THEME VARIABLES
+// =====================
+
+// --- Light theme (default)
+:root {
+  --color-primary:#33aaff;
+}
+
+// --- Dark theme
+[data-theme='dark'] {
+  --color-primary: #33aaff;
+}
