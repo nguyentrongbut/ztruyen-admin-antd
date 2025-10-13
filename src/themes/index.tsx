@@ -13,6 +13,7 @@ const CustomTheme = ({children}: {children: ReactNode}) => {
             theme={{
                 token: {
                     colorPrimary: THEME_CONFIG.PRIMARY_COLOR,
+                    fontFamily: THEME_CONFIG.FONT_FAMILY,
                 },
             }}
         >

@@ -1,5 +1,6 @@
 // ** Styles
 import 'antd/dist/reset.css';
+import '@/styles/global.scss'
 
 // ** Theme
 import CustomTheme from "@/themes";

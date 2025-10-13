@@ -22,6 +22,7 @@ const Login = () => {
             <Button onClick={() => i18n.changeLanguage("en")}>🇬🇧 English</Button>
 
             <p>Current language: {i18n.language}</p>
+            
         </>
     )
 }
