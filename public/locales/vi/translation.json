@@ -1,6 +1,16 @@
 {
   "login": "Đăng nhập",
   "desc_login": "Trang đăng nhập quản trị Ztruyen — hệ thống quản lý truyện tranh, tác giả, người dùng và nội dung.",
-  "copy_right_login": "Được hỗ trợ bởi nguyentrongbut",
-  "placeholder_pass_login": "Mật khẩu: ztruyen.io"
+  "copy_right_login": "Được tạo bởi nguyentrongbut",
+  "placeholder_pass_login": "Mật khẩu: ztruyen.io",
+  "login_success": "Đăng nhập thành công",
+
+  "email_required": "Vui lòng nhập email!",
+  "email_invalid": "Email không hợp lệ!",
+  "password_required": "Vui lòng nhập mật khẩu!",
+  "password_min_length": "Mật khẩu phải có ít nhất 6 ký tự!",
+  "password_uppercase": "Mật khẩu phải có ít nhất 1 chữ hoa (A-Z)!",
+  "password_lowercase": "Mật khẩu phải có ít nhất 1 chữ thường (a-z)!",
+  "password_number": "Mật khẩu phải có ít nhất 1 số (0-9)!",
+  "password_special": "Mật khẩu phải có ít nhất 1 ký tự đặc biệt (@$!%*?&)!"
 }

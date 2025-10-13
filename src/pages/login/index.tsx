@@ -11,7 +11,7 @@ import styles from "@/pages/login/login.module.scss"
 import {useTranslation} from "react-i18next";
 
 // ** antd
-import {Button, Form, Input} from "antd";
+import {Button, Form, type FormProps, Input, message} from "antd";
 
 // ** Components
 import Logo from "@/components/common/logo";
@@ -31,6 +31,11 @@ const Login = () => {
 
     const [form] = Form.useForm();
 
+    const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+        console.log('Success:', values);
+        message.success(t('login_success'));
+    };
+
     return (
         <>
             <Helmet>
@@ -44,10 +49,14 @@ const Login = () => {
                     <Form
                         layout='vertical'
                         form={form}
+                        onFinish={onFinish}
                     >
                         <Form.Item<FieldType>
                             name='email'
-                            rules={[{required: true, message: 'Please input your email!'}]}
+                            rules={[
+                                {required: true, message: t('email_required')},
+                                {type: 'email', message: t('email_invalid')},
+                            ]}
                         >
                             <Input
                                 prefix={<MailOutlined/>}
@@ -55,14 +64,38 @@ const Login = () => {
                         </Form.Item>
                         <Form.Item<FieldType>
                             name='password'
-                            rules={[{required: true, message: 'Please input your password!'}]}
+                            rules={[
+                                {required: true, message: t('password_required')},
+                                {
+                                    validator: (_, value) => {
+                                        if (!value) return Promise.resolve();
+
+                                        if (value.length < 6)
+                                            return Promise.reject(new Error(t('password_min_length')));
+                                        if (!/[A-Z]/.test(value))
+                                            return Promise.reject(new Error(t('password_uppercase')));
+                                        if (!/[a-z]/.test(value))
+                                            return Promise.reject(new Error(t('password_lowercase')));
+                                        if (!/[0-9]/.test(value))
+                                            return Promise.reject(new Error(t('password_number')));
+                                        if (!/[@$!%*?&]/.test(value))
+                                            return Promise.reject(new Error(t('password_special')));
+
+                                        return Promise.resolve();
+                                    },
+                                },
+                            ]}
                         >
                             <Input.Password
                                 prefix={<LockOutlined/>}
                                 size='large' placeholder={t('placeholder_pass_login')}/>
                         </Form.Item>
                         <Form.Item>
-                            <Button className={styles.btn} size='large' type="primary">{t('login')}</Button>
+                            <Button className={styles.btn}
+                                    size='large' type="primary"
+                                    htmlType="submit">
+                                {t('login')}
+                            </Button>
                         </Form.Item>
                     </Form>
                 </div>
@@ -71,7 +104,7 @@ const Login = () => {
                         <Link to='https://ztruyen.io.vn/' target='_blank'>Ztruyen</Link>
                         <Link to='https://github.com/nguyentrongbut' target='_blank' className={styles.githubLink}>
                             <GithubOutlined/>
-                            nguyen trong but
+                            Bút
                         </Link>
                     </div>
                     <p>© {t('copy_right_login')}</p>

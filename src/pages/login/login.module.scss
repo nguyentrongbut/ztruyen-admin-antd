@@ -6,7 +6,7 @@ $btn-width: 100%;
 $mt-btn: 12px;
 
 // form wrapper
-$form-width: 400px;
+$form-width: 360px;
 
 // desc
 $desc-color: rgba(0, 0, 0, 0.65);
@@ -41,7 +41,7 @@ $gap-github-link: 2px;
 }
 
 .desc {
-  width: calc($form-width + 20px);
+  width: calc($form-width + 100px);
   color: $desc-color;
   margin-top: $mt-desc;
   margin-bottom: $mb-desc;
