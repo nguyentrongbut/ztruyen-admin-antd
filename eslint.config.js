@@ -19,5 +19,12 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      // Cho phép dùng `any`
+      '@typescript-eslint/no-explicit-any': 'off',
+
+      // 👇 Tắt cảnh báo "An interface declaring no members..."
+      '@typescript-eslint/no-empty-object-type': 'off',
+    },
   },
 ])

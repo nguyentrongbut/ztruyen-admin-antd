@@ -1,16 +1,29 @@
-export interface IBackendRes<T> {
-    error?: string | string[];
-    message: string;
-    statusCode: number;
-    data?: T;
+export interface IUserLogin {
+    _id?: string;
+    name: string;
+    email: string;
+    role?: string
 }
 
-export interface IModelPaginate<T> {
-    meta: {
-        page: number;
-        limit: number;
-        totalPages: number;
-        totalItems: number;
-    },
-    result: T[]
+export interface ILogin {
+    access_token: string;
+    user: IUserLogin
+}
+
+
+export interface IUser {
+    _id?: string;
+    name: string;
+    email: string;
+    password?: string;
+    age: number;
+    gender: string;
+    address: string;
+    provider: string;
+    role?: string
+    createdBy?: string;
+    isDeleted?: boolean;
+    deletedAt?: boolean | null;
+    createdAt?: string;
+    updatedAt?: string;
 }

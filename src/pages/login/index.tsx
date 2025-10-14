@@ -1,5 +1,6 @@
 // ** React
-import {Link} from "react-router";
+import {useEffect} from "react";
+import {Link, useNavigate} from "react-router";
 
 // ** React helmet
 import {Helmet} from "react-helmet-async";
@@ -11,7 +12,7 @@ import styles from "@/pages/login/login.module.scss"
 import {useTranslation} from "react-i18next";
 
 // ** antd
-import {Button, Form, type FormProps, Input, message} from "antd";
+import {App, Button, Form, type FormProps, Input } from "antd";
 
 // ** Components
 import Logo from "@/components/common/logo";
@@ -20,20 +21,66 @@ import TranslationDropdown from "@/components/common/translation-dropdown";
 // ** icon
 import {GithubOutlined, LockOutlined, MailOutlined} from "@ant-design/icons";
 
+// ** Services
+import {AuthService} from "@/services/auth";
+
+// ** Hooks
+import {useCurrentApp} from "@/hooks/useCurrentApp.ts";
+
+// ** Configs
+import {CONFIG_ROLE} from "@/configs/role";
+
 type FieldType = {
-    email?: string;
-    password?: string;
+    email: string;
+    password: string;
 };
 
 const Login = () => {
 
     const {t} = useTranslation();
 
+    const navigate = useNavigate();
+
     const [form] = Form.useForm();
 
-    const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-        console.log('Success:', values);
-        message.success(t('login_success'));
+    const { message, notification} = App.useApp()
+
+    const { setIsAuthenticated, setUser, isAuthenticated, user } = useCurrentApp()
+
+    const isLogin = isAuthenticated && user?.role === CONFIG_ROLE.ADMIN
+
+    useEffect(() => {
+        if (isLogin) {
+            navigate("/");
+        }
+    }, [isLogin, navigate])
+
+    const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+        const res = await AuthService.login(values);
+
+        if (res.data) {
+            if (res.data.user.role === CONFIG_ROLE.ADMIN) {
+                setIsAuthenticated(true);
+                setUser(res.data.user);
+                localStorage.setItem('ZTC_ATK', res.data.access_token);
+                message.success(t('login_success'));
+                navigate('/');
+            } else {
+                notification.error({
+                    message: t('error_general'),
+                    description: t('403'),
+                    duration: 5
+                })
+                navigate('/403')
+            }
+        } else {
+            notification.error({
+                message: t('error_general'),
+                description:
+                    res.message && Array.isArray(res.message) ? res.message[0] : res.message,
+                duration: 5
+            })
+        }
     };
 
     return (

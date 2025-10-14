@@ -12,12 +12,22 @@ import AppRoutes from "@/routes";
 // ** React helmet
 import {HelmetProvider} from "react-helmet-async";
 
+// ** Contents
+import {AppProvider} from "@/context/app.context.tsx";
+
+// ** antd
+import {App as AntdApp} from "antd";
+
 function App() {
     return (
         <HelmetProvider>
-            <CustomTheme>
-                <AppRoutes/>
-            </CustomTheme>
+            <AppProvider>
+                <AntdApp>
+                    <CustomTheme>
+                        <AppRoutes/>
+                    </CustomTheme>
+                </AntdApp>
+            </AppProvider>
         </HelmetProvider>
     )
 }

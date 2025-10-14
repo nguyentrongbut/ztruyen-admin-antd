@@ -12,5 +12,10 @@
   "password_uppercase": "Mật khẩu phải có ít nhất 1 chữ hoa (A-Z)!",
   "password_lowercase": "Mật khẩu phải có ít nhất 1 chữ thường (a-z)!",
   "password_number": "Mật khẩu phải có ít nhất 1 số (0-9)!",
-  "password_special": "Mật khẩu phải có ít nhất 1 ký tự đặc biệt (@$!%*?&)!"
+  "password_special": "Mật khẩu phải có ít nhất 1 ký tự đặc biệt (@$!%*?&)!",
+
+  "error_general": "Đã xảy ra lỗi, vui lòng thử lại.",
+
+  "403": "Xin lỗi, bạn không có quyền truy cập vào trang này",
+  "back_login": "Trở lại đăng nhập"
 }
