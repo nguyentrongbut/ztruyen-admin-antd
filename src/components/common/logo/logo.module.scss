@@ -1,26 +1,64 @@
-@use "@/styles/variables";
+@use '@/styles/abstracts/mixins' as *;
 
-// wrapper
-$gap: 5px;
+// img
+$medium-size-img: 50px;
+
+$large-size-img: 70px;
 
 // title
-$fz-title: 33px;
-$fz-first-title: 38px;
+$medium-fz-title: 20px;
+$medium-fz-first-title: 25px;
 
-.wrapper {
-  display: flex;
-  gap: $gap;
-  align-items: end;
+$large-fz-title: 33px;
+$large-fz-first-title: 38px;
+
+.medium {
+  img {
+    width: $medium-size-img;
+    height: $medium-size-img;
+  }
+
+  .title {
+    font-size: $medium-fz-title;
+    font-weight: bold;
+    margin-bottom: 0;
+
+    &::first-letter {
+      font-size: $medium-fz-first-title;
+      color: var(--color-primary);
+      text-transform: uppercase;
+    }
+  }
+}
+
+
+.large {
+  img {
+    width: $large-size-img;
+    height: $large-size-img;
+  }
+
+  .title {
+    font-size: $large-fz-title;
+    font-weight: bold;
+    margin-bottom: 0;
+
+    &::first-letter {
+      font-size: $large-fz-first-title;
+      color: var(--color-primary);
+      text-transform: uppercase;
+    }
+  }
 }
 
 .title {
-  font-size: $fz-title;
-  font-weight: bold;
-  margin-bottom: 0;
+  display: none;
+}
 
-  &::first-letter {
-    font-size: $fz-first-title;
-    color: var(--color-primary);
-    text-transform: uppercase;
+@include screen(md) {
+  .title {
+    display: block;
   }
 }
+
+

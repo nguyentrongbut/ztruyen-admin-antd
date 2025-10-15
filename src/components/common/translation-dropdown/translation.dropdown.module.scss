@@ -1,0 +1,34 @@
+// block
+$mt-block: 5px;
+
+// fixed
+$tr-fixed: 20px;
+
+// icon
+$p-icon: 12px;
+$size-icon: 16px;
+$rounded-icon: 8px;
+
+.block {
+  margin-top: $mt-block;
+  .icon {
+    color: var(--color-secondary);
+  }
+}
+
+.fixed {
+  position: fixed;
+  right: $tr-fixed;
+  top: $tr-fixed;
+}
+
+.itemActive {
+  color: var(--color-primary);
+}
+
+.icon {
+  font-size: $size-icon;
+  padding: $p-icon;
+  cursor: pointer;
+  border-radius: $rounded-icon;
+}

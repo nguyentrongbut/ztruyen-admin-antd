@@ -1,20 +1,27 @@
 // ** React
-import { useEffect, useState } from "react";
+import {type HTMLAttributes, useEffect, useState} from "react";
 
 // ** Styles
-import styles from "@/components/common/translation-dropdown/transilation.dropdown.module.scss";
+import styles from "@/components/common/translation-dropdown/translation.dropdown.module.scss";
 
 // ** i18n
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 // ** antd
-import { Button, Dropdown, type MenuProps } from "antd";
+import { Dropdown, type MenuProps} from "antd";
 
 // ** icon
-import { TranslationOutlined } from "@ant-design/icons";
+import {TranslationOutlined} from "@ant-design/icons";
 
-const TranslationDropdown = () => {
-    const { i18n } = useTranslation();
+// ** clsx
+import clsx from "clsx";
+
+interface ITranslationDropdownProps extends HTMLAttributes<HTMLDivElement>{
+    type?: 'fixed' | 'block'
+}
+
+const TranslationDropdown = ({type = 'block', ...props}: ITranslationDropdownProps) => {
+    const {i18n} = useTranslation();
     const [language, setLanguage] = useState(i18n.language);
 
     useEffect(() => {
@@ -52,11 +59,9 @@ const TranslationDropdown = () => {
     ];
 
     return (
-        <div className={styles.wrapper}>
-            <Dropdown menu={{ items }} placement="bottomRight">
-                <Button className={styles.btn}>
-                    <TranslationOutlined />
-                </Button>
+        <div className={styles[type]} {...props}>
+            <Dropdown menu={{items}} placement="bottomRight">
+                <TranslationOutlined className={clsx(styles.icon, 'hover-bg')}/>
             </Dropdown>
         </div>
     );

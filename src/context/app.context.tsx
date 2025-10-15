@@ -10,7 +10,7 @@ import {UserService} from "@/services/user";
 interface IAppContext {
     isAuthenticated: boolean;
     setIsAuthenticated: (v: boolean) => void;
-    setUser: (v: IUserLogin) => void;
+    setUser: (v: IUserLogin | null) => void;
     user: IUserLogin | null;
     isAppLoading: boolean;
     setIsAppLoading: (v: boolean) => void;

@@ -62,9 +62,14 @@ $gap-github-link: 2px;
   color: $desc-color;
 }
 
+
+.websiteLink,
+.githubLink {
+  color: $desc-color;
+}
+
 .githubLink {
   display: flex;
   gap: $gap-github-link;
   align-items: center;
-  color: $desc-color;
 }

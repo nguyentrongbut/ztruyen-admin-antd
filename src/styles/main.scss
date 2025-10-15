@@ -1,0 +1,19 @@
+// styles/main.scss
+@use 'abstracts/variables';
+@use 'abstracts/functions';
+@use 'abstracts/mixins';
+
+// reset & base
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/base';
+
+// vendors
+
+// themes
+@use 'themes/index';
+
+// layout & components
+
+// pages
+

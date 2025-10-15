@@ -1,0 +1,10 @@
+// wrapper
+$b-b-wrapper-color: #0505050f;
+
+.wrapper {
+  position: fixed;
+  background: transparent;
+  width: 100%;
+  z-index: 999;
+  border-bottom: 1px solid $b-b-wrapper-color;
+}

@@ -1,0 +1,9 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.hover-bg {
+  &:hover {
+    background: #00000008;
+  }
+}

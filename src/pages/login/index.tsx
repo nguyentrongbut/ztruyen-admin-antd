@@ -1,5 +1,5 @@
 // ** React
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router";
 
 // ** React helmet
@@ -47,6 +47,8 @@ const Login = () => {
 
     const { setIsAuthenticated, setUser, isAuthenticated, user } = useCurrentApp()
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const isLogin = isAuthenticated && user?.role === CONFIG_ROLE.ADMIN
 
     useEffect(() => {
@@ -56,8 +58,9 @@ const Login = () => {
     }, [isLogin, navigate])
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+        setIsLoading(true)
         const res = await AuthService.login(values);
-
+        setIsLoading(false)
         if (res.data) {
             if (res.data.user.role === CONFIG_ROLE.ADMIN) {
                 setIsAuthenticated(true);
@@ -88,9 +91,9 @@ const Login = () => {
             <Helmet>
                 <title>Ztruyen - {t('login')}</title>
             </Helmet>
-            <TranslationDropdown/>
+            <TranslationDropdown type='fixed'/>
             <div className={styles.bg}>
-                <Logo/>
+                <Logo size='large'/>
                 <p className={styles.desc}>{t('desc_login')}</p>
                 <div className={styles.formWrapper}>
                     <Form
@@ -139,6 +142,7 @@ const Login = () => {
                         </Form.Item>
                         <Form.Item>
                             <Button className={styles.btn}
+                                    loading={isLoading}
                                     size='large' type="primary"
                                     htmlType="submit">
                                 {t('login')}
@@ -148,7 +152,7 @@ const Login = () => {
                 </div>
                 <div className={styles.footer}>
                     <div className={styles.groupLink}>
-                        <Link to='https://ztruyen.io.vn/' target='_blank'>Ztruyen</Link>
+                        <Link to='https://ztruyen.io.vn/' target='_blank' className={styles.websiteLink}>Ztruyen</Link>
                         <Link to='https://github.com/nguyentrongbut' target='_blank' className={styles.githubLink}>
                             <GithubOutlined/>
                             Bút

@@ -14,4 +14,5 @@ interface LoginPayload {
 
 export const AuthService = {
     login: (payload: LoginPayload) => axios.post<IBackendRes<ILogin>>(CONFIG_API.AUTH.LOGIN, payload, {skipAuth: true}),
+    logout: () => axios.post<IBackendRes<string>>(CONFIG_API.AUTH.LOGOUT)
 };

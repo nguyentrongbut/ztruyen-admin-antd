@@ -1,5 +1,9 @@
+// ** Axios
 import axios, {AxiosError, type AxiosResponse, type InternalAxiosRequestConfig} from "axios";
 import { Mutex } from "async-mutex";
+
+// ** Configs
+import {BASE_URL} from "@/configs/apis";
 
 // Extend InternalAxiosRequestConfig để thêm các properties tùy chỉnh
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -8,7 +12,7 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 }
 
 const instance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: BASE_URL,
     withCredentials: true
 });
 
@@ -63,7 +67,7 @@ instance.interceptors.response.use(
 
                     // Gọi API refresh token với accessToken cũ trong header
                     const response = await axios.get(
-                        `${import.meta.env.VITE_API_URL}/auth/refresh`,
+                        `${BASE_URL}/auth/refresh`,
                         {
                             withCredentials: true,
                             headers: {

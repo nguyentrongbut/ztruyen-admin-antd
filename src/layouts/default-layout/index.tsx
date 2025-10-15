@@ -1,13 +1,18 @@
 // ** React
 import {Outlet} from "react-router";
 
+// ** Layouts
+import Header from "@/layouts/default-layout/components/header";
+
+// ** antd
+import {Layout} from "antd";
+
 const DefaultLayout = () => {
     return (
-        <>
-            header
+        <Layout>
+            <Header/>
             <Outlet />
-            footer
-        </>
+        </Layout>
     )
 }
 

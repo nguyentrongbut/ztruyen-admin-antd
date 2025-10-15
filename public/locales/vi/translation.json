@@ -17,5 +17,8 @@
   "error_general": "Đã xảy ra lỗi, vui lòng thử lại.",
 
   "403": "Xin lỗi, bạn không có quyền truy cập vào trang này",
-  "back_login": "Trở lại đăng nhập"
+  "back_login": "Trở lại đăng nhập",
+
+  "logout": "Đăng xuất",
+  "logout_success": "Đăng xuất thành công"
 }

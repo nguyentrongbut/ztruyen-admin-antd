@@ -1,0 +1,13 @@
+// wrapper
+$p-wrapper: 8px;
+$rounded-wrapper: 8px;
+
+.name {
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+
+.wrapper {
+  padding: $p-wrapper;
+  border-radius: $rounded-wrapper;
+}

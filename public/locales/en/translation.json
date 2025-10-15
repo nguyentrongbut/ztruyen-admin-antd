@@ -3,7 +3,7 @@
   "desc_login": "Ztruyen Admin Login — a system for managing comics, authors, users, and content.",
   "copy_right_login": "Powered by nguyentrongbut",
   "placeholder_pass_login": "Password: ztruyen.io",
-  "login_success": "Login Success",
+  "login_success": "Login success",
 
   "email_required": "Please enter your email!",
   "email_invalid": "Invalid email address!",
@@ -17,5 +17,8 @@
   "error_general": "An error has occurred, please try again.",
 
   "403": "Sorry, you are not authorized to access this page.",
-  "back_login": "Back Login"
+  "back_login": "Back Login",
+
+  "logout": "Logout",
+  "logout_success": "Logout success"
 }

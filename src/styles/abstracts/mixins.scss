@@ -1,0 +1,27 @@
+@use "breakpoints" as *;
+
+// =============================
+//  Responsive mixins
+// =============================
+
+@mixin screen($size) {
+  $width: map-get($breakpoints, $size);
+  @if $width {
+    @media (min-width: $width) {
+      @content;
+    }
+  } @else {
+    @warn "breakpoint `#{$size}` not found in $breakpoints.";
+  }
+}
+
+@mixin max-screen($size) {
+  $width: map-get($breakpoints, $size);
+  @if $width {
+    @media (max-width: $width) {
+      @content;
+    }
+  } @else {
+    @warn "️breakpoint `#{$size}` not found in $breakpoints.";
+  }
+}
