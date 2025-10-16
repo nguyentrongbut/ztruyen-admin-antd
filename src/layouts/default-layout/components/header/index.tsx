@@ -2,7 +2,7 @@
 import {Link} from "react-router";
 
 // ** Antd
-import {Flex, Layout} from "antd";
+import {Flex, Switch} from "antd";
 
 // ** styles
 import styles from '@/layouts/default-layout/components/header/header.module.scss'
@@ -12,12 +12,18 @@ import Logo from "@/components/common/logo";
 import TranslationDropdown from "@/components/common/translation-dropdown";
 import AvatarDropdown from "@/components/common/avatar-dropdown";
 
-const {Header: AntdHeader} = Layout;
+// ** icons
+import {MoonOutlined, SunOutlined} from "@ant-design/icons";
+
+// ** hooks
+import {useTheme} from "@/hooks/useTheme.ts";
 
 const Header = () => {
 
+    const { theme, toggleTheme } = useTheme();
+
     return (
-        <AntdHeader className={styles.wrapper}>
+        <header className={styles.wrapper}>
            <Flex justify='space-between' align='center'>
                <Link to='/'>
                    <Logo/>
@@ -25,9 +31,16 @@ const Header = () => {
                <Flex align='center' gap='middle'>
                    <TranslationDropdown />
                    <AvatarDropdown/>
+                   <Switch
+                       style={{marginTop: '10px'}}
+                       checkedChildren={<SunOutlined />}
+                       unCheckedChildren={<MoonOutlined />}
+                       checked={theme === "light"}
+                       onChange={toggleTheme}
+                   />
                </Flex>
            </Flex>
-        </AntdHeader>
+        </header>
     )
 }
 

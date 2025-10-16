@@ -12,6 +12,7 @@ import {HelmetProvider} from "react-helmet-async";
 
 // ** Contents
 import {AppProvider} from "@/context/app.context.tsx";
+import {ThemeProvider} from "@/context/theme.context.tsx";
 
 // ** antd
 import {App as AntdApp} from "antd";
@@ -21,9 +22,11 @@ function App() {
         <HelmetProvider>
             <AppProvider>
                 <AntdApp>
-                    <CustomTheme>
-                        <AppRoutes/>
-                    </CustomTheme>
+                    <ThemeProvider>
+                        <CustomTheme>
+                            <AppRoutes/>
+                        </CustomTheme>
+                    </ThemeProvider>
                 </AntdApp>
             </AppProvider>
         </HelmetProvider>

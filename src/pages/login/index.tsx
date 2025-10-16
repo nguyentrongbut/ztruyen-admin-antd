@@ -12,7 +12,7 @@ import styles from "@/pages/login/login.module.scss"
 import {useTranslation} from "react-i18next";
 
 // ** antd
-import {App, Button, Form, type FormProps, Input } from "antd";
+import {App, Button, ConfigProvider, Form, type FormProps, Input, theme} from "antd";
 
 // ** Components
 import Logo from "@/components/common/logo";
@@ -29,6 +29,7 @@ import {useCurrentApp} from "@/hooks/useCurrentApp.ts";
 
 // ** Configs
 import {CONFIG_ROLE} from "@/configs/role";
+import {THEME_LIGHT_CONFIG} from "@/configs/themes";
 
 type FieldType = {
     email: string;
@@ -43,9 +44,9 @@ const Login = () => {
 
     const [form] = Form.useForm();
 
-    const { message, notification} = App.useApp()
+    const {message, notification} = App.useApp()
 
-    const { setIsAuthenticated, setUser, isAuthenticated, user } = useCurrentApp()
+    const {setIsAuthenticated, setUser, isAuthenticated, user} = useCurrentApp()
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -91,76 +92,82 @@ const Login = () => {
             <Helmet>
                 <title>Ztruyen - {t('login')}</title>
             </Helmet>
-            <TranslationDropdown type='fixed'/>
-            <div className={styles.bg}>
-                <Logo size='large'/>
-                <p className={styles.desc}>{t('desc_login')}</p>
-                <div className={styles.formWrapper}>
-                    <Form
-                        layout='vertical'
-                        form={form}
-                        onFinish={onFinish}
-                    >
-                        <Form.Item<FieldType>
-                            name='email'
-                            rules={[
-                                {required: true, message: t('email_required')},
-                                {type: 'email', message: t('email_invalid')},
-                            ]}
+            <ConfigProvider theme={{
+                algorithm: theme.defaultAlgorithm,
+                token: THEME_LIGHT_CONFIG
+            }}>
+                <TranslationDropdown type='fixed'/>
+                <div className={styles.bg}>
+                    <Logo size='large'/>
+                    <p className={styles.desc}>{t('desc_login')}</p>
+                    <div className={styles.formWrapper}>
+                        <Form
+                            layout='vertical'
+                            form={form}
+                            onFinish={onFinish}
                         >
-                            <Input
-                                prefix={<MailOutlined/>}
-                                size='large' placeholder="Email: email@gmail.com"/>
-                        </Form.Item>
-                        <Form.Item<FieldType>
-                            name='password'
-                            rules={[
-                                {required: true, message: t('password_required')},
-                                {
-                                    validator: (_, value) => {
-                                        if (!value) return Promise.resolve();
+                            <Form.Item<FieldType>
+                                name='email'
+                                rules={[
+                                    {required: true, message: t('email_required')},
+                                    {type: 'email', message: t('email_invalid')},
+                                ]}
+                            >
+                                <Input
+                                    prefix={<MailOutlined/>}
+                                    size='large' placeholder="Email: email@gmail.com"/>
+                            </Form.Item>
+                            <Form.Item<FieldType>
+                                name='password'
+                                rules={[
+                                    {required: true, message: t('password_required')},
+                                    {
+                                        validator: (_, value) => {
+                                            if (!value) return Promise.resolve();
 
-                                        if (value.length < 6)
-                                            return Promise.reject(new Error(t('password_min_length')));
-                                        if (!/[A-Z]/.test(value))
-                                            return Promise.reject(new Error(t('password_uppercase')));
-                                        if (!/[a-z]/.test(value))
-                                            return Promise.reject(new Error(t('password_lowercase')));
-                                        if (!/[0-9]/.test(value))
-                                            return Promise.reject(new Error(t('password_number')));
-                                        if (!/[@$!%*?&]/.test(value))
-                                            return Promise.reject(new Error(t('password_special')));
+                                            if (value.length < 6)
+                                                return Promise.reject(new Error(t('password_min_length')));
+                                            if (!/[A-Z]/.test(value))
+                                                return Promise.reject(new Error(t('password_uppercase')));
+                                            if (!/[a-z]/.test(value))
+                                                return Promise.reject(new Error(t('password_lowercase')));
+                                            if (!/[0-9]/.test(value))
+                                                return Promise.reject(new Error(t('password_number')));
+                                            if (!/[@$!%*?&]/.test(value))
+                                                return Promise.reject(new Error(t('password_special')));
 
-                                        return Promise.resolve();
+                                            return Promise.resolve();
+                                        },
                                     },
-                                },
-                            ]}
-                        >
-                            <Input.Password
-                                prefix={<LockOutlined/>}
-                                size='large' placeholder={t('placeholder_pass_login')}/>
-                        </Form.Item>
-                        <Form.Item>
-                            <Button className={styles.btn}
-                                    loading={isLoading}
-                                    size='large' type="primary"
-                                    htmlType="submit">
-                                {t('login')}
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </div>
-                <div className={styles.footer}>
-                    <div className={styles.groupLink}>
-                        <Link to='https://ztruyen.io.vn/' target='_blank' className={styles.websiteLink}>Ztruyen</Link>
-                        <Link to='https://github.com/nguyentrongbut' target='_blank' className={styles.githubLink}>
-                            <GithubOutlined/>
-                            Bút
-                        </Link>
+                                ]}
+                            >
+                                <Input.Password
+                                    prefix={<LockOutlined/>}
+                                    size='large' placeholder={t('placeholder_pass_login')}/>
+                            </Form.Item>
+                            <Form.Item>
+                                <Button className={styles.btn}
+                                        loading={isLoading}
+                                        size='large' type="primary"
+                                        htmlType="submit">
+                                    {t('login')}
+                                </Button>
+                            </Form.Item>
+                        </Form>
                     </div>
-                    <p>© {t('copy_right_login')}</p>
+                    <div className={styles.footer}>
+                        <div className={styles.groupLink}>
+                            <Link to='https://ztruyen.io.vn/' target='_blank'
+                                  className={styles.websiteLink}>Ztruyen</Link>
+                            <Link to='https://github.com/nguyentrongbut' target='_blank' className={styles.githubLink}>
+                                <GithubOutlined/>
+                                Bút
+                            </Link>
+                        </div>
+                        <p>© {t('copy_right_login')}</p>
+                    </div>
                 </div>
-            </div>
+            </ConfigProvider>
         </>
     )
 }

@@ -1,6 +1,19 @@
 export const THEME_LIGHT_CONFIG = {
-    PRIMARY_COLOR: '#33aaff',
-    FONT_FAMILY: 'Montserrat, "Montserrat Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    BG_COLOR_MASK: '#ffffff0d',
-    BG_COLOR_PRIMARY: '#f5f6f7',
-} as const;
+    colorPrimary: '#33aaff',
+    colorBgLayout: '#fefefe',
+    colorBgElevated: '#ffffff',
+    colorText: '#000000d9',
+    colorBgMask: 'rgba(0, 0, 0, 0.45)',
+    fontFamily:
+        'Montserrat, "Montserrat Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+};
+
+export const THEME_DARK_CONFIG = {
+    colorPrimary: '#33aaff',
+    colorBgLayout: '#181818',
+    colorBgElevated: '#1f1f1f',
+    colorText: '#e5e7eb',
+    colorBgMask: 'rgba(0, 0, 0, 0.45)',
+    fontFamily:
+        'Montserrat, "Montserrat Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+};

@@ -2,21 +2,27 @@
 import type {ReactNode} from "react";
 
 // ** Antd
-import {ConfigProvider, theme} from "antd";
+import {ConfigProvider, theme as antdTheme} from "antd";
 
 // ** Configs
-import {THEME_LIGHT_CONFIG} from "@/configs/themes";
+import {THEME_DARK_CONFIG, THEME_LIGHT_CONFIG} from "@/configs/themes";
+
+// ** Hooks
+import {useTheme} from "@/hooks/useTheme.ts";
 
 const CustomTheme = ({children}: { children: ReactNode }) => {
+
+    const { theme } = useTheme()
+    const isDark = theme === "dark";
+
     return (
         <ConfigProvider
             theme={{
-                algorithm: theme.defaultAlgorithm,
+                algorithm: isDark
+                    ? antdTheme.darkAlgorithm
+                    : antdTheme.defaultAlgorithm,
                 token: {
-                    colorPrimary: THEME_LIGHT_CONFIG.PRIMARY_COLOR,
-                    colorBgLayout: THEME_LIGHT_CONFIG.BG_COLOR_PRIMARY,
-                    fontFamily: THEME_LIGHT_CONFIG.FONT_FAMILY,
-                    colorBgMask: THEME_LIGHT_CONFIG.BG_COLOR_MASK
+                    ...(isDark ? THEME_DARK_CONFIG : THEME_LIGHT_CONFIG),
                 },
             }}
         >

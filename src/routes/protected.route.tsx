@@ -30,5 +30,11 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
         return <Navigate to="/403" replace />;
     }
 
-    return <>{children}</>;
+    return (
+        <>
+            <main>
+                {children}
+            </main>
+        </>
+    )
 };

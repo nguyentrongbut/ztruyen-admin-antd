@@ -4,6 +4,10 @@
 
 .hover-bg {
   &:hover {
-    background: #00000008;
+    background: var(--bg-hover);
   }
+}
+
+:focus {
+  outline: none;
 }

@@ -10,8 +10,9 @@ import {Layout} from "antd";
 const DefaultLayout = () => {
     return (
         <Layout>
+            <div style={{ paddingTop: '68.8px'}}></div>
             <Header/>
-            <Outlet />
+            <Outlet/>
         </Layout>
     )
 }

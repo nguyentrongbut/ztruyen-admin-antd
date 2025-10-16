@@ -76,7 +76,7 @@ const AvatarDropdown = () => {
     }
 
     return (
-        <Dropdown menu={{items}} placement='topCenter'>
+        <Dropdown menu={{items}} placement='top'>
             <Flex gap='small' align='end' className={clsx(styles.wrapper, 'cursor-pointer hover-bg')}>
                 {/*`${CONFIG_IMG.AVATAR}/tst-3`*/}
                 <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1"/>
