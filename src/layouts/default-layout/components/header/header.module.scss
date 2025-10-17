@@ -1,9 +1,27 @@
+// wrapper
+$p-wrapper: 10px 16px;
+$filter-blur: 8px;
+
+// icon
+$fz-icon: 18px;
+$p-icon: 10px;
+
 .wrapper {
   position: fixed;
   background: transparent;
   width: 100%;
   z-index: 999;
-  padding: 10px 16px;
+  padding: $p-wrapper;
   border-bottom: 1px solid var(--border-b-header);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur($filter-blur);
+}
+
+.sidebar {
+  position: relative;
+}
+
+.icon {
+  padding: $p-icon;
+  font-size: $fz-icon;
+  color: var();
 }
