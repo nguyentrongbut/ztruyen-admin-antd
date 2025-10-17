@@ -94,7 +94,7 @@ const Login = () => {
             </Helmet>
             <ConfigProvider theme={{
                 algorithm: theme.defaultAlgorithm,
-                token: THEME_LIGHT_CONFIG
+                token: THEME_LIGHT_CONFIG.GLOBAL
             }}>
                 <TranslationDropdown type='fixed'/>
                 <div className={styles.bg}>

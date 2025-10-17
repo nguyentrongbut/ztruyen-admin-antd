@@ -5,4 +5,5 @@
   z-index: 999;
   padding: 10px 16px;
   border-bottom: 1px solid var(--border-b-header);
+  backdrop-filter: blur(8px);
 }

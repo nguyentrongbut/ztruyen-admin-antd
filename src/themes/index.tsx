@@ -12,8 +12,10 @@ import {useTheme} from "@/hooks/useTheme.ts";
 
 const CustomTheme = ({children}: { children: ReactNode }) => {
 
-    const { theme } = useTheme()
+    const {theme} = useTheme()
     const isDark = theme === "dark";
+
+    const currentTheme = isDark ? THEME_DARK_CONFIG : THEME_LIGHT_CONFIG;
 
     return (
         <ConfigProvider
@@ -22,8 +24,16 @@ const CustomTheme = ({children}: { children: ReactNode }) => {
                     ? antdTheme.darkAlgorithm
                     : antdTheme.defaultAlgorithm,
                 token: {
-                    ...(isDark ? THEME_DARK_CONFIG : THEME_LIGHT_CONFIG),
+                    ...currentTheme.GLOBAL,
                 },
+                components: {
+                    Layout: {
+                        siderBg: currentTheme.GLOBAL.colorBgLayout
+                    },
+                    Menu: {
+                       ...currentTheme.MENU
+                    }
+                }
             }}
         >
             {children}

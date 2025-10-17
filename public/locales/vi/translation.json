@@ -20,5 +20,40 @@
   "back_login": "Trở lại đăng nhập",
 
   "logout": "Đăng xuất",
-  "logout_success": "Đăng xuất thành công"
+  "logout_success": "Đăng xuất thành công",
+
+  "menu": {
+    "dashboard": "Tổng quan",
+    "users": {
+      "title": "Người dùng",
+      "list": "Danh sách người dùng",
+      "trash": "Thùng rác",
+      "reports": "Báo cáo người dùng"
+    },
+    "stories": {
+      "title": "Truyện",
+      "list": "Danh sách truyện",
+      "pending": "Duyệt truyện mới",
+      "genres": "Thể loại",
+      "trash": "Thùng rác"
+    },
+    "chapters": {
+      "title": "Chương truyện",
+      "list": "Danh sách chương",
+      "hidden": "Chương bị ẩn"
+    },
+    "comments": {
+      "title": "Bình luận",
+      "list": "Danh sách bình luận",
+      "reports": "Báo cáo bình luận"
+    },
+    "reports": "Báo cáo & Khiếu nại",
+    "notifications": "Thông báo",
+    "interactions": {
+      "title": "Tương tác",
+      "follows": "Theo dõi",
+      "views": "Lượt xem"
+    },
+    "settings": "Cài đặt chung"
+  }
 }

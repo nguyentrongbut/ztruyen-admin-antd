@@ -20,5 +20,40 @@
   "back_login": "Back Login",
 
   "logout": "Logout",
-  "logout_success": "Logout success"
+  "logout_success": "Logout success",
+
+  "menu": {
+    "dashboard": "Dashboard",
+    "users": {
+      "title": "Users",
+      "list": "User List",
+      "trash": "Recycle Bin",
+      "reports": "User Reports"
+    },
+    "stories": {
+      "title": "Stories",
+      "list": "Story List",
+      "pending": "Pending Approval",
+      "genres": "Genres",
+      "trash": "Recycle Bin"
+    },
+    "chapters": {
+      "title": "Chapters",
+      "list": "Chapter List",
+      "hidden": "Hidden Chapters"
+    },
+    "comments": {
+      "title": "Comments",
+      "list": "Comment List",
+      "reports": "Reported Comments"
+    },
+    "reports": "Reports & Complaints",
+    "notifications": "Notifications",
+    "interactions": {
+      "title": "Interactions",
+      "follows": "Followers",
+      "views": "Views"
+    },
+    "settings": "General Settings"
+  }
 }
