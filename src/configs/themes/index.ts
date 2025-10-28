@@ -16,7 +16,13 @@ export const THEME_LIGHT_CONFIG = {
         itemColor: '#000000a6',
         itemSelectedBg: 'rgba(0,0,0,0.03)',
         itemHoverBg: 'rgba(0,0,0,0.03)',
-    }
+    },
+    BUTTON: {
+        colorPrimary: '#33aaff',
+        colorPrimaryHover: '#45a8f0',
+        colorPrimaryActive: '#2489cf',
+        colorTextLightSolid: '#fff',
+    },
 };
 
 export const THEME_DARK_CONFIG = {
@@ -31,6 +37,12 @@ export const THEME_DARK_CONFIG = {
         itemSelectedColor: '#ffffff',
         subMenuItemSelectedColor: '#ffffff',
         itemSelectedBg: '#33aaff',
-    }
+    },
+    BUTTON: {
+        colorPrimary: '#33aaff',
+        colorPrimaryHover: '#45a8f0',
+        colorPrimaryActive: '#2489cf',
+        colorTextLightSolid: '#fff',
+    },
 };
 

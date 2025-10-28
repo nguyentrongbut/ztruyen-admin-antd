@@ -1,3 +1,6 @@
+// drawer
+
+// scroll drawer
 .custom-scroll--drawer .ant-drawer-body::-webkit-scrollbar {
   width: 6px;
 }
@@ -12,6 +15,7 @@
   background-color: var(--scroll-bar-thumb-hover);
 }
 
+// overlay drawer
 .hidden-overlay--drawer {
   .ant-drawer-body {
     overflow: auto !important;
@@ -22,3 +26,5 @@
     overflow: visible !important;
   }
 }
+
+// end drawer

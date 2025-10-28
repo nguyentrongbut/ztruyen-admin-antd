@@ -9,4 +9,9 @@ import {CONFIG_API} from "@/configs/apis";
 
 export const UserService = {
     getProfile: () => axios.get<IBackendRes<IUser>>(CONFIG_API.USER.PROFILE),
+    getListUser: async (query: string) => {
+        return await axios.get<IBackendRes<IModelPaginate<IUser>>>(
+            `${CONFIG_API.USER.INDEX}?${query}`
+        );
+    },
 };

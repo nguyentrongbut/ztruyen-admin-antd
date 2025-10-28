@@ -1,5 +1,6 @@
 // ** React
 import {useState} from "react";
+import {useLocation} from "react-router";
 
 // ** antd
 import {Layout, Menu} from "antd";
@@ -21,6 +22,7 @@ const Sidebar = () => {
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
     const items = useMenuItems();
+    const location = useLocation();
 
     return (
         <div className={styles.wrapper}>
@@ -29,8 +31,8 @@ const Sidebar = () => {
                    trigger={null}>
                 <Menu
                     mode="inline" style={{height: '100%'}}
-                    defaultSelectedKeys={['/dashboard']}
                     items={items}
+                    selectedKeys={[location.pathname]}
                 />
             </Sider>
         </div>

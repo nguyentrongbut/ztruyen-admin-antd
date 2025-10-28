@@ -2,6 +2,10 @@
   cursor: pointer;
 }
 
+.select-none {
+  user-select: none;
+}
+
 .hover-bg {
   &:hover {
     background: var(--bg-hover);
@@ -28,3 +32,19 @@
 }
 
 // end scroll
+
+// box model
+.w-full {
+  width: 100%;
+}
+// end box model
+
+// font size
+.fz-13 {
+  font-size: 13px;
+}
+
+// Space(antd) wrapper input
+.space-input > div:first-child {
+  width: 100%;
+}

@@ -11,6 +11,12 @@ import {Layout} from "antd";
 // ** Hooks
 import useResponsive from "@/hooks/useResponsive.ts";
 
+// ** Style
+import styles from "@/layouts/default-layout/default.layout.module.scss"
+
+// ** clsx
+import clsx from "clsx";
+
 const {Content} = Layout;
 
 const DefaultLayout = () => {
@@ -18,14 +24,12 @@ const DefaultLayout = () => {
     const {isMd} = useResponsive()
 
     return (
-        <Layout hasSider>
+        <Layout hasSider style={{ minHeight: "100vh" }}>
             {isMd && (
                 <Sidebar/>
             )}
             <Header isMd={isMd}/>
-            <Content
-                style={{margin: '24px 16px 0', overflow: 'initial'}}
-            >
+            <Content className={clsx(styles.wrapper, "select-none")}>
                 <Outlet/>
             </Content>
         </Layout>

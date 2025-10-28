@@ -1,3 +1,7 @@
+// ** React query
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
+
 // ** Styles
 import "@/styles/main.scss";
 
@@ -17,6 +21,8 @@ import {ThemeProvider} from "@/context/theme.context.tsx";
 // ** antd
 import {App as AntdApp} from "antd";
 
+const queryClient = new QueryClient()
+
 function App() {
     return (
         <HelmetProvider>
@@ -24,7 +30,10 @@ function App() {
                 <AntdApp>
                     <ThemeProvider>
                         <CustomTheme>
+                            <QueryClientProvider client={queryClient}>
                             <AppRoutes/>
+                                <ReactQueryDevtools initialIsOpen={false}/>
+                            </QueryClientProvider>
                         </CustomTheme>
                     </ThemeProvider>
                 </AntdApp>

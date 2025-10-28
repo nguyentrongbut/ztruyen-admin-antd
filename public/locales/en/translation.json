@@ -4,7 +4,6 @@
   "copy_right_login": "Powered by nguyentrongbut",
   "placeholder_pass_login": "Password: ztruyen.io",
   "login_success": "Login success",
-
   "email_required": "Please enter your email!",
   "email_invalid": "Invalid email address!",
   "password_required": "Please enter your password!",
@@ -13,15 +12,11 @@
   "password_lowercase": "Password must contain at least one lowercase letter (a-z)!",
   "password_number": "Password must contain at least one number (0-9)!",
   "password_special": "Must include one special character (@$!%*?&).",
-
   "error_general": "An error has occurred, please try again.",
-
   "403": "Sorry, you are not authorized to access this page.",
   "back_login": "Back Login",
-
   "logout": "Logout",
   "logout_success": "Logout success",
-
   "menu": {
     "dashboard": "Dashboard",
     "users": {
@@ -55,5 +50,75 @@
       "views": "Views"
     },
     "settings": "General Settings"
+  },
+  "user": {
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "age": "Age",
+      "gender": "Gender",
+      "role": "Role",
+      "provider": "Provider",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Action",
+      "notSet": "Not set"
+    },
+    "genders": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "roles": {
+      "user": "User",
+      "author": "Author"
+    },
+    "providers": {
+      "local": "Local",
+      "facebook": "Facebook",
+      "google": "Google"
+    },
+    "create": "Add User",
+    "filter": {
+      "gender": "Filter by gender",
+      "age": "Filter by age",
+      "role": "Filter by role",
+      "provider": "Filter by provider",
+      "createdAt": "Filter by created date",
+      "updatedAt": "Filter by updated date",
+      "choose": {
+        "gender": "Select gender",
+        "role": "Select role",
+        "provider": "Select account type"
+      }
+    },
+    "search": {
+      "name": "Search by name",
+      "email": "Search by email",
+      "choose": {
+        "name": "Enter username",
+        "email": "Enter user email"
+      }
+    }
+  },
+  "table": {
+    "form": "From",
+    "to": "To",
+    "form_date": "Select start date",
+    "export": "Export Data",
+    "import": "Import Data",
+    "delete_selected": "Multi Delete",
+    "filter_options": "Filter Options",
+    "basic_filters": "Basic Filters",
+    "advanced_filters": "Advanced Filters",
+    "active_filters": "active filters",
+    "reset": "Reset",
+    "filter_btn": "Filter",
+    "search_btn": "Search",
+    "of": "of",
+    "refresh": "Refresh",
+    "reset_all_filter": "Reset filter",
+    "filter": "Filter",
+    "search": "Search",
+    "reset_all_search": "Reset search"
   }
 }

@@ -1,6 +1,6 @@
 // ** React
 import type {ReactNode} from "react";
-import { Navigate } from "react-router";
+import {Navigate} from "react-router";
 
 // ** Hooks
 import {useCurrentApp} from "@/hooks/useCurrentApp.ts";
@@ -15,26 +15,24 @@ interface ProtectedRouteProps {
     children: ReactNode;
 }
 
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-    const { isAuthenticated, user, isAppLoading } = useCurrentApp();
+export const ProtectedRoute = ({children}: ProtectedRouteProps) => {
+    const {isAuthenticated, user, isAppLoading} = useCurrentApp();
 
     if (isAppLoading) {
         return <Loading/>;
     }
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/login" replace/>;
     }
 
     if (user?.role !== CONFIG_ROLE.ADMIN) {
-        return <Navigate to="/403" replace />;
+        return <Navigate to="/403" replace/>;
     }
 
     return (
         <>
-            <main>
-                {children}
-            </main>
+            {children}
         </>
     )
 };

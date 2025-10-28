@@ -1,0 +1,14 @@
+// wrapper
+$mt-title: 25px;
+
+// title
+$fz-title: 20px;
+
+.wrapper {
+  margin-top: $mt-title;
+  margin-bottom: calc($mt-title / 3) ;
+}
+
+.title {
+  font-size: $fz-title !important;
+}

@@ -1,0 +1,9 @@
+@use '@/styles/abstracts/variables' as *;
+
+$mx-wrapper: 40px;
+$mt-wrapper: 26px;
+
+.wrapper {
+  margin: calc($mt-header + $mt-wrapper) $mx-wrapper 0;
+  overflow: initial;
+}

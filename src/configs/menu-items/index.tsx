@@ -1,38 +1,43 @@
+// ** React
+import { Link } from "react-router";
+
 // ** i18n
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 // ** antd
-import type {MenuProps} from "antd";
+import type { MenuProps } from "antd";
 
 // ** icons
 import {
     BellOutlined,
     BookOutlined,
     CommentOutlined,
-    DashboardOutlined, HeartOutlined, SettingOutlined,
+    DashboardOutlined,
+    HeartOutlined,
+    SettingOutlined,
     UserOutlined,
-    WarningOutlined
+    WarningOutlined,
 } from "@ant-design/icons";
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>["items"][number];
 
 const useMenuItems = (): MenuItem[] => {
     const { t } = useTranslation();
 
     return [
         {
-            key: "/dashboard",
+            key: "/",
             icon: <DashboardOutlined />,
-            label: t("menu.dashboard"),
+            label: <Link to="/">{t("menu.dashboard")}</Link>,
         },
         {
             key: "users",
             icon: <UserOutlined />,
             label: t("menu.users.title"),
             children: [
-                { key: "/users", label: t("menu.users.list") },
-                { key: "/users/trash", label: t("menu.users.trash") },
-                { key: "/users/reports", label: t("menu.users.reports") },
+                { key: "/users", label: <Link to="/users">{t("menu.users.list")}</Link> },
+                { key: "/users/trash", label: <Link to="/users/trash">{t("menu.users.trash")}</Link> },
+                { key: "/users/reports", label: <Link to="/users/reports">{t("menu.users.reports")}</Link> },
             ],
         },
         {
@@ -40,10 +45,10 @@ const useMenuItems = (): MenuItem[] => {
             icon: <BookOutlined />,
             label: t("menu.stories.title"),
             children: [
-                { key: "/stories", label: t("menu.stories.list") },
-                { key: "/stories/pending", label: t("menu.stories.pending") },
-                { key: "/genres", label: t("menu.stories.genres") },
-                { key: "/stories/trash", label: t("menu.stories.trash") },
+                { key: "/stories", label: <Link to="/stories">{t("menu.stories.list")}</Link> },
+                { key: "/stories/pending", label: <Link to="/stories/pending">{t("menu.stories.pending")}</Link> },
+                { key: "/genres", label: <Link to="/genres">{t("menu.stories.genres")}</Link> },
+                { key: "/stories/trash", label: <Link to="/stories/trash">{t("menu.stories.trash")}</Link> },
             ],
         },
         {
@@ -51,8 +56,8 @@ const useMenuItems = (): MenuItem[] => {
             icon: <BookOutlined />,
             label: t("menu.chapters.title"),
             children: [
-                { key: "/chapters", label: t("menu.chapters.list") },
-                { key: "/chapters/hidden", label: t("menu.chapters.hidden") },
+                { key: "/chapters", label: <Link to="/chapters">{t("menu.chapters.list")}</Link> },
+                { key: "/chapters/hidden", label: <Link to="/chapters/hidden">{t("menu.chapters.hidden")}</Link> },
             ],
         },
         {
@@ -60,36 +65,35 @@ const useMenuItems = (): MenuItem[] => {
             icon: <CommentOutlined />,
             label: t("menu.comments.title"),
             children: [
-                { key: "/comments", label: t("menu.comments.list") },
-                { key: "/comments/reports", label: t("menu.comments.reports") },
+                { key: "/comments", label: <Link to="/comments">{t("menu.comments.list")}</Link> },
+                { key: "/comments/reports", label: <Link to="/comments/reports">{t("menu.comments.reports")}</Link> },
             ],
         },
         {
-            key: "reports",
+            key: "/reports",
             icon: <WarningOutlined />,
-            label: t("menu.reports"),
+            label: <Link to="/reports">{t("menu.reports")}</Link>,
         },
         {
-            key: "notifications",
+            key: "/notifications",
             icon: <BellOutlined />,
-            label: t("menu.notifications"),
+            label: <Link to="/notifications">{t("menu.notifications")}</Link>,
         },
         {
             key: "interactions",
             icon: <HeartOutlined />,
             label: t("menu.interactions.title"),
             children: [
-                { key: "/follows", label: t("menu.interactions.follows") },
-                { key: "/views", label: t("menu.interactions.views") },
+                { key: "/follows", label: <Link to="/follows">{t("menu.interactions.follows")}</Link> },
+                { key: "/views", label: <Link to="/views">{t("menu.interactions.views")}</Link> },
             ],
         },
         {
-            key: "settings",
+            key: "/settings",
             icon: <SettingOutlined />,
-            label: t("menu.settings"),
+            label: <Link to="/settings">{t("menu.settings")}</Link>,
         },
     ];
 };
-
 
 export default useMenuItems;

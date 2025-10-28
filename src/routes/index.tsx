@@ -9,9 +9,9 @@ import DefaultLayout from "@/layouts/default-layout";
 
 // ** Pages
 import Login from "@/pages/login";
-import Home from "@/pages/home";
+import Dashboard from "@/pages/dashboard";
 import ForbiddenPage from "@/pages/403";
-
+import UserList from "@/pages/users/list";
 
 const AppRoutes = () => {
     return (
@@ -24,7 +24,8 @@ const AppRoutes = () => {
                         </ProtectedRoute>
                     }
                 >
-                    <Route index path="/" element={<Home/>}/>
+                    <Route index path="/" element={<Dashboard/>}/>
+                    <Route index path="/users" element={<UserList/>}/>
                 </Route>
 
                 <Route path='/login' element={<Login/>}/>

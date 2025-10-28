@@ -32,7 +32,10 @@ const CustomTheme = ({children}: { children: ReactNode }) => {
                     },
                     Menu: {
                        ...currentTheme.MENU
-                    }
+                    },
+                    Button: {
+                        ...currentTheme.BUTTON,
+                    },
                 }
             }}
         >

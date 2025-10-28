@@ -1,6 +1,6 @@
 // ** React
 import {useState} from "react";
-import {Link} from "react-router";
+import {Link, useLocation} from "react-router";
 
 // ** Antd
 import {Drawer, Flex, Menu, Switch, theme as themeAntd} from "antd";
@@ -34,7 +34,7 @@ const Header = ({isMd}: IHeaderProps) => {
     const {theme, toggleTheme} = useTheme();
 
     const [openSidebar, setOpenSidebar] = useState(false);
-
+    const location = useLocation();
 
     const {
         token: {colorText},
@@ -65,8 +65,8 @@ const Header = ({isMd}: IHeaderProps) => {
                                 <CollapsedBtn collapsed={openSidebar} setCollapsed={setOpenSidebar} drawer/>
                                 <Menu
                                     mode="inline" style={{height: '100%'}}
-                                    defaultSelectedKeys={['/dashboard']}
                                     items={items}
+                                    selectedKeys={[location.pathname]}
                                 />
                             </Drawer>
                         </>

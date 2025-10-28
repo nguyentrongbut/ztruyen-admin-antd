@@ -21,7 +21,6 @@ export interface IUser {
     address: string;
     provider: string;
     role?: string
-    createdBy?: string;
     isDeleted?: boolean;
     deletedAt?: boolean | null;
     createdAt?: string;

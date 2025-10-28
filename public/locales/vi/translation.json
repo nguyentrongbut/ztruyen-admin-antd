@@ -4,7 +4,6 @@
   "copy_right_login": "Được tạo bởi nguyentrongbut",
   "placeholder_pass_login": "Mật khẩu: ztruyen.io",
   "login_success": "Đăng nhập thành công",
-
   "email_required": "Vui lòng nhập email!",
   "email_invalid": "Email không hợp lệ!",
   "password_required": "Vui lòng nhập mật khẩu!",
@@ -13,15 +12,11 @@
   "password_lowercase": "Mật khẩu phải có ít nhất 1 chữ thường (a-z)!",
   "password_number": "Mật khẩu phải có ít nhất 1 số (0-9)!",
   "password_special": "Mật khẩu phải có ít nhất 1 ký tự đặc biệt (@$!%*?&)!",
-
   "error_general": "Đã xảy ra lỗi, vui lòng thử lại.",
-
   "403": "Xin lỗi, bạn không có quyền truy cập vào trang này",
   "back_login": "Trở lại đăng nhập",
-
   "logout": "Đăng xuất",
   "logout_success": "Đăng xuất thành công",
-
   "menu": {
     "dashboard": "Tổng quan",
     "users": {
@@ -55,5 +50,76 @@
       "views": "Lượt xem"
     },
     "settings": "Cài đặt chung"
+  },
+  "user": {
+    "columns": {
+      "name": "Tên",
+      "email": "Email",
+      "age": "Tuổi",
+      "gender": "Giới tính",
+      "role": "Vai trò",
+      "provider": "Loại tài khoản",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "action": "Thao tác",
+      "notSet": "Chưa cập nhật"
+    },
+    "genders": {
+      "male": "Nam",
+      "female": "Nữ"
+    },
+    "roles": {
+      "user": "Người dùng",
+      "author": "Tác giả"
+    },
+    "providers": {
+      "local": "Nội bộ",
+      "facebook": "Facebook",
+      "google": "Google"
+    },
+    "create": "Thêm tài khoản",
+    "filter": {
+      "gender": "Lọc theo giới tính",
+      "age": "Lọc theo tuổi",
+      "role": "Lọc theo vai trò",
+      "provider": "Lọc theo loại tài khoản",
+      "createdAt": "Lọc theo ngày tạo",
+      "updatedAt": "Lọc theo ngày cập nhật",
+      "choose": {
+        "gender": "Chọn giới tính",
+        "role": "Chọn vai trò",
+        "provider": "Chọn loại tài khoản"
+      }
+    },
+    "search": {
+      "name": "Tìm kiếm theo tên",
+      "email": "Tìm kiếm theo email",
+      "choose": {
+        "name": "Nhập tên người dùng",
+        "email": "Nhập email người dùng"
+      }
+    }
+  },
+  "table": {
+    "from": "Từ",
+    "to": "Đến",
+    "from_date": "Chọn ngày từ",
+    "to_date": "Đến ngày",
+    "export": "Xuất dữ liệu",
+    "import": "Nhập dữ liệu",
+    "delete_selected": "Xóa nhiều",
+    "filter_options": "Tùy chọn lọc",
+    "basic_filters": "Bộ lọc cơ bản",
+    "advanced_filters": "Bộ lọc nâng cao",
+    "active_filters": "bộ lọc đang áp dụng",
+    "reset": "Đặt lại",
+    "filter_btn": "Lọc",
+    "search_btn": "Tìm",
+    "of": "của",
+    "refresh": "Làm mới",
+    "reset_all_filter": "Đặt lại bộ lọc",
+    "filter": "Bộ lọc",
+    "search": "Bộ tìm kiếm",
+    "reset_all_search": "Đặt lại bộ tìm kiếm"
   }
 }
