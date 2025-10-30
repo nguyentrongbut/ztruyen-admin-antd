@@ -15,7 +15,7 @@ import {App, Breadcrumb, Button, Col, Collapse, Row, Space, Table, theme, Typogr
 import styles from "@/pages/users/list/list.user.module.scss"
 
 // ** columns
-import {listUserColumns} from "@/pages/users/list/columns";
+import {listUserColumns} from "@/pages/users/components/columns";
 
 // ** Types
 import type {IUser} from "@/types/backend";

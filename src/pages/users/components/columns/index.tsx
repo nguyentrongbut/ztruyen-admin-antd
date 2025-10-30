@@ -12,11 +12,13 @@ import type {IUser} from "@/types/backend";
 import dayjs from "dayjs";
 
 // ** utils
-import {DeleteOutlined, EditOutlined, EyeOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import UserDetail from "@/pages/users/view";
 
 export const listUserColumns = (
     t: TFunction
 ): TableProps<IUser>["columns"] => {
+
     return [
         {
             title: t("user.columns.name"),
@@ -110,11 +112,7 @@ export const listUserColumns = (
             fixed: "right",
             render: (_, record) => (
                 <Space size="middle">
-                    <Button
-                        type="text"
-                        icon={<EyeOutlined/>}
-                        onClick={() => console.log("view", record._id)}
-                    />
+                    <UserDetail id={record?._id as string} t={t}/>
                     <Button
                         type="text"
                         icon={<EditOutlined/>}

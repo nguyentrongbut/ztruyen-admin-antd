@@ -52,10 +52,14 @@
     "settings": "General Settings"
   },
   "user": {
+    "detail": {
+      "title": "User Details"
+    },
     "columns": {
       "name": "Name",
       "email": "Email",
       "age": "Age",
+      "birthday": "Birthday",
       "gender": "Gender",
       "role": "Role",
       "provider": "Provider",

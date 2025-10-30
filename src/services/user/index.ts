@@ -14,4 +14,9 @@ export const UserService = {
             `${CONFIG_API.USER.INDEX}?${query}`
         );
     },
+    getDetailUser: async (id: string) => {
+        return await axios.get<IBackendRes<IUser>>(
+            `${CONFIG_API.USER.DETAIL}/${id}`
+        );
+    },
 };

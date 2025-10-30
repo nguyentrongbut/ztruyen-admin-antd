@@ -52,9 +52,13 @@
     "settings": "Cài đặt chung"
   },
   "user": {
+    "detail": {
+      "title": "Chi tiết người dùng"
+    },
     "columns": {
       "name": "Tên",
       "email": "Email",
+      "birthday": "Sinh nhật",
       "age": "Tuổi",
       "gender": "Giới tính",
       "role": "Vai trò",

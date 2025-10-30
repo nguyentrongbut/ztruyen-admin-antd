@@ -7,6 +7,7 @@ export const CONFIG_API = {
     },
     USER: {
         INDEX: 'users',
-        PROFILE: 'users/profile'
+        PROFILE: 'users/profile',
+        DETAIL: 'users/detail'
     }
 } as const

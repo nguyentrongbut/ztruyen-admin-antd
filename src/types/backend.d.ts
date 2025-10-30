@@ -16,6 +16,10 @@ export interface IUser {
     name: string;
     email: string;
     password?: string;
+    avatar?: string
+    avatar_frame?: string
+    bio?: string;
+    birthday?: string;
     age: number;
     gender: string;
     address: string;
