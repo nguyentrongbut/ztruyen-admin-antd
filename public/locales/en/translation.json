@@ -102,9 +102,24 @@
         "name": "Enter username",
         "email": "Enter user email"
       }
+    },
+    "delete": {
+      "title": "Are you sure you want to delete this user",
+      "desc": "This action can be undone. The user's data will be deleted from the user's side.",
+      "deleted_success": "Deleted successfully.",
+      "deleted_fail": "Delete failed. Please try again."
+    },
+    "delete_multi": {
+      "title": "Are you sure you want to delete multiple users?",
+      "desc": "This action cannot be undone. The data of multiple users will be permanently removed on the user side.",
+      "deleted_success": "Successfully deleted multiple users.",
+      "deleted_fail": "Failed to delete multiple users. Please try again."
     }
   },
   "table": {
+    "delete": "Delete",
+    "ok": "Confirm",
+    "cancel": "Cancel",
     "form": "From",
     "to": "To",
     "form_date": "Select start date",
@@ -123,6 +138,11 @@
     "reset_all_filter": "Reset filter",
     "filter": "Filter",
     "search": "Search",
-    "reset_all_search": "Reset search"
+    "reset_all_search": "Reset search",
+    "select_all": "Select All",
+    "select_invert": "Invert Selection",
+    "select_none": "Clear Selection",
+    "select_odd_rows": "Select Odd Rows",
+    "select_even_rows": "Select Even Rows"
   }
 }

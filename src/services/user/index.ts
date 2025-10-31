@@ -19,4 +19,16 @@ export const UserService = {
             `${CONFIG_API.USER.DETAIL}/${id}`
         );
     },
+    removeUser: async (id: string) => {
+        return await axios.delete(
+            `${CONFIG_API.USER.DELETE}/${id}`
+        );
+    },
+    removeMultiUser: async (ids: string[]) => {
+        return await axios.delete(
+            `${CONFIG_API.USER.DELETE_MULTI}`, {
+                data: { ids },
+            }
+        );
+    }
 };

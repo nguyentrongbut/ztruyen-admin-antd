@@ -12,8 +12,11 @@ import type {IUser} from "@/types/backend";
 import dayjs from "dayjs";
 
 // ** utils
-import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import { EditOutlined} from "@ant-design/icons";
+
+// ** Page components
 import UserDetail from "@/pages/users/view";
+import DeleteUser from "@/pages/users/delete";
 
 export const listUserColumns = (
     t: TFunction
@@ -118,12 +121,7 @@ export const listUserColumns = (
                         icon={<EditOutlined/>}
                         onClick={() => console.log("update", record._id)}
                     />
-                    <Button
-                        danger
-                        type="text"
-                        icon={<DeleteOutlined/>}
-                        onClick={() => console.log("delete", record._id)}
-                    />
+                    <DeleteUser id={record._id as string} t={t} name={record?.name}/>
                 </Space>
             ),
         },

@@ -102,9 +102,24 @@
         "name": "Nhập tên người dùng",
         "email": "Nhập email người dùng"
       }
+    },
+    "delete": {
+      "title": "Bạn có chắc chắn muốn xóa người dùng",
+      "desc": "Hành động này có thể hoàn tác. Dữ liệu của người dùng sẽ bị xóa ở phía người dùng.",
+      "deleted_success": "Xóa người dùng thành công.",
+      "deleted_fail": "Xóa người dùng thất bại. Vui lòng thử lại."
+    },
+    "delete_multi": {
+      "title": "Bạn có chắc chắn muốn xóa nhiều người dùng không?",
+      "desc": "Hành động này có thể hoàn tác. Dữ liệu của nhiều người dùng sẽ bị xóa ở phía người dùng.",
+      "deleted_success": "Xóa nhiều người dùng thành công.",
+      "deleted_fail": "Xóa nhiều người dùng thất bại. Vui lòng thử lại."
     }
   },
   "table": {
+    "delete": "Xóa",
+    "ok": "Xác nhận",
+    "cancel": "Huỷ",
     "from": "Từ",
     "to": "Đến",
     "from_date": "Chọn ngày từ",
@@ -124,6 +139,11 @@
     "reset_all_filter": "Đặt lại bộ lọc",
     "filter": "Bộ lọc",
     "search": "Bộ tìm kiếm",
-    "reset_all_search": "Đặt lại bộ tìm kiếm"
+    "reset_all_search": "Đặt lại bộ tìm kiếm",
+    "select_all": "Chọn tất cả",
+    "select_invert": "Đảo lựa chọn",
+    "select_none": "Bỏ chọn",
+    "select_odd_rows": "Chọn hàng lẻ",
+    "select_even_rows": "Chọn hàng chẵn"
   }
 }

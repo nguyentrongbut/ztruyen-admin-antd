@@ -29,11 +29,12 @@ import {useTableSelection} from "@/hooks/useTableSelection.ts";
 
 import clsx from "clsx";
 // ** Icon
-import {DeleteOutlined, ExportOutlined, ImportOutlined, PlusOutlined, ReloadOutlined} from "@ant-design/icons";
+import {ExportOutlined, ImportOutlined, PlusOutlined, ReloadOutlined} from "@ant-design/icons";
 
 // ** Page Components
 import {filterGroup} from "@/pages/users/components/filter-group";
 import {searchGroup} from "@/pages/users/components/search-group";
+import DeleteMultiUser from "@/pages/users/delete-multi";
 
 const {Title} = Typography;
 
@@ -98,7 +99,7 @@ const UserList = () => {
 
     const listUser = data?.data?.result
 
-    const {rowSelection} = useTableSelection<IUser>(listUser);
+    const {rowSelection, selectedRowKeys, setSelectedRowKeys} = useTableSelection<IUser>(listUser);
 
     const meta = data?.data?.meta ?? {page: 1, limit: 10, totalItems: 0};
 
@@ -149,7 +150,7 @@ const UserList = () => {
             <Row justify="space-between" align="middle" gutter={[16, 16]}>
                 {/* Title */}
                 <Col>
-                    <Title className={clsx(styles.title, styles.wrapper)} style={{ margin: 0 }}>
+                    <Title className={clsx(styles.title, styles.wrapper)} style={{margin: 0}}>
                         {t('menu.users.list')}
                     </Title>
                 </Col>
@@ -158,29 +159,31 @@ const UserList = () => {
                 <Col>
                     <Row gutter={[8, 8]} align="middle" wrap>
                         <Col>
-                            <Button icon={<ReloadOutlined />} onClick={handleFullReset}>
+                            <Button icon={<ReloadOutlined/>} onClick={handleFullReset}>
                                 {t("table.refresh")}
                             </Button>
                         </Col>
                         <Col>
-                            <Button icon={<ExportOutlined />}>
+                            <Button icon={<ExportOutlined/>}>
                                 {t("table.export")}
                             </Button>
                         </Col>
 
                         <Col>
-                            <Button icon={<ImportOutlined />}>
+                            <Button icon={<ImportOutlined/>}>
                                 {t("table.import")}
                             </Button>
                         </Col>
 
                         <Col>
-                            <Button icon={<DeleteOutlined />} danger>
-                                {t("table.delete_selected")}
-                            </Button>
+                            <DeleteMultiUser
+                                t={t}
+                                ids={selectedRowKeys as string[]}
+                                onClearSelection={() => setSelectedRowKeys([])}
+                            />
                         </Col>
                         <Col>
-                            <Button icon={<PlusOutlined />} type="primary">
+                            <Button icon={<PlusOutlined/>} type="primary">
                                 {t("user.create")}
                             </Button>
                         </Col>

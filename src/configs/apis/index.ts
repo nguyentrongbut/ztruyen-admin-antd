@@ -8,6 +8,8 @@ export const CONFIG_API = {
     USER: {
         INDEX: 'users',
         PROFILE: 'users/profile',
-        DETAIL: 'users/detail'
+        DETAIL: 'users/detail',
+        DELETE: 'users/delete',
+        DELETE_MULTI: 'users/delete-multi'
     }
 } as const
