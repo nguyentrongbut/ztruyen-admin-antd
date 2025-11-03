@@ -91,7 +91,7 @@ const UserList = () => {
     const {data} = useQuery({
         queryKey: ["getListUser", queryParams],
         queryFn: () =>
-            UserService.getListUser(query),
+            UserService.list(query),
         placeholderData: keepPreviousData,
         retry: false,
         refetchOnWindowFocus: false,

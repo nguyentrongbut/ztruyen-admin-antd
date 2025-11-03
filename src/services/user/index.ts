@@ -8,13 +8,13 @@ import type {IUser} from "@/types/backend";
 import {CONFIG_API} from "@/configs/apis";
 
 export const UserService = {
-    getProfile: () => axios.get<IBackendRes<IUser>>(CONFIG_API.USER.PROFILE),
-    getListUser: async (query: string) => {
+    profile: () => axios.get<IBackendRes<IUser>>(CONFIG_API.USER.PROFILE),
+    list: async (query: string) => {
         return await axios.get<IBackendRes<IModelPaginate<IUser>>>(
             `${CONFIG_API.USER.INDEX}?${query}`
         );
     },
-    getDetailUser: async (id: string) => {
+    detail: async (id: string) => {
         return await axios.get<IBackendRes<IUser>>(
             `${CONFIG_API.USER.DETAIL}/${id}`
         );
@@ -24,7 +24,7 @@ export const UserService = {
             `${CONFIG_API.USER.DELETE}/${id}`
         );
     },
-    removeMultiUser: async (ids: string[]) => {
+    removeMulti: async (ids: string[]) => {
         return await axios.delete(
             CONFIG_API.USER.DELETE_MULTI, {
                 data: {ids},

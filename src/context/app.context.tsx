@@ -37,7 +37,7 @@ export const AppProvider = ({children}: TProps) => {
                 return;
             }
 
-            const res = await UserService.getProfile();
+            const res = await UserService.profile();
 
             if (res?.data) {
                 setUser(res.data);

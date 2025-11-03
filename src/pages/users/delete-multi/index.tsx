@@ -32,7 +32,7 @@ const DeleteMultiUser = ({ids, t, onClearSelection}: IDeleteMultiUser) => {
 
     const deleteMultiUserMutation = useMutation({
         mutationFn: async () => {
-            const res = await UserService.removeMultiUser(ids)
+            const res = await UserService.removeMulti(ids)
             return handleResponse(res)
         },
         onSuccess: () => {

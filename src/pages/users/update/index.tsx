@@ -81,7 +81,7 @@ const UpdateUser = ({t, id}: IUpdateUser) => {
         queryKey: ["getDetailUser", id],
         queryFn: async () => {
             try {
-                const res = await UserService.getDetailUser(id);
+                const res = await UserService.detail(id);
                 return handleResponse<IUser>(res)
             } catch (err: any) {
                 notification.error({
