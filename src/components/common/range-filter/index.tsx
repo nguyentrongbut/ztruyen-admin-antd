@@ -10,6 +10,13 @@ import {DatePicker, InputNumber, Space, Button, Flex} from "antd";
 // ** Dayjs
 import {Dayjs} from "dayjs";
 
+// ** i18n
+import i18n from "@/i18n";
+
+// ** antd locales
+import viVN from "antd/es/date-picker/locale/vi_VN";
+import enUS from "antd/es/date-picker/locale/en_US";
+
 const {RangePicker} = DatePicker;
 
 interface IRangeFilter<T> {
@@ -114,6 +121,7 @@ export const RangeFilter = <T extends object>({
                         setValue([null, null]);
                     }
                 }}
+                locale={i18n.language === "vi" ? viVN : enUS}
                 showTime
                 format="YYYY-MM-DD HH:mm:ss"
                 allowClear
