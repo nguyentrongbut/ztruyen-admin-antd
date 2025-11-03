@@ -26,9 +26,12 @@ export const UserService = {
     },
     removeMultiUser: async (ids: string[]) => {
         return await axios.delete(
-            `${CONFIG_API.USER.DELETE_MULTI}`, {
-                data: { ids },
+            CONFIG_API.USER.DELETE_MULTI, {
+                data: {ids},
             }
         );
+    },
+    add: async (payload: any) => {
+        return await axios.post<IBackendRes<IUser>>(CONFIG_API.USER.INDEX, payload)
     }
 };

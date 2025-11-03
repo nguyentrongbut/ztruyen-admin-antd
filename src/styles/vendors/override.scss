@@ -28,3 +28,16 @@
 }
 
 // end drawer
+
+// upload antd
+.custom-cover-upload .ant-upload-list-item-container {
+  width: 100% !important;
+  height: 180px !important;
+}
+
+.custom-cover-upload .ant-upload-list-item-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+// end upload antd

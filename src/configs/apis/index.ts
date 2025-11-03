@@ -10,6 +10,11 @@ export const CONFIG_API = {
         PROFILE: 'users/profile',
         DETAIL: 'users/detail',
         DELETE: 'users/delete',
-        DELETE_MULTI: 'users/delete-multi'
+        DELETE_MULTI: 'users/delete-multi',
+    },
+    UPLOAD: {
+        ONE: '/upload-telegram/upload',
+        MULTI: '/upload-telegram/upload-multiple',
+        IMAGE: '/images'
     }
 } as const

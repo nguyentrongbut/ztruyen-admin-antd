@@ -1,0 +1,10 @@
+// wrapper
+$max-h: 70vh;
+$pr: 10px;
+
+.wrapper {
+  max-height: $max-h;
+  overflow-y: auto;
+  padding-right: $pr;
+  margin-right: -$pr;
+}

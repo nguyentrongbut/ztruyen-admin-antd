@@ -66,7 +66,8 @@
       "createdAt": "Created At",
       "updatedAt": "Updated At",
       "action": "Action",
-      "notSet": "Not set"
+      "notSet": "Not set",
+      "password": "Password"
     },
     "genders": {
       "male": "Male",
@@ -81,7 +82,12 @@
       "facebook": "Facebook",
       "google": "Google"
     },
-    "create": "Add User",
+    "create": {
+      "title": "Add User",
+      "avatar": "Avatar",
+      "cover": "Cover",
+      "created_success": "User created successfully."
+    },
     "filter": {
       "gender": "Filter by gender",
       "age": "Filter by age",
@@ -114,6 +120,24 @@
       "desc": "This action cannot be undone. The data of multiple users will be permanently removed on the user side.",
       "deleted_success": "Successfully deleted multiple users.",
       "deleted_fail": "Failed to delete multiple users. Please try again."
+    },
+    "placeholder": {
+      "name": "Enter full name",
+      "email": "Enter email address",
+      "password": "Enter password",
+      "birthday": "Select birthday",
+      "bio": "Write something about yourself",
+      "avatar": "Upload avatar",
+      "cover": "Upload cover"
+    },
+    "validation": {
+      "nameRequired": "Please enter a name",
+      "nameMin": "Name must be at least 2 characters",
+      "emailRequired": "Please enter an email",
+      "emailInvalid": "Email is invalid",
+      "passwordRequired": "Please enter a password",
+      "passwordMin": "Password must be at least 6 characters",
+      "roleRequired": "Please select a role"
     }
   },
   "table": {

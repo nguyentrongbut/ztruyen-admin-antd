@@ -1,22 +1,37 @@
 // ** React
-import {type ReactNode, useState, cloneElement, isValidElement, type ReactElement} from "react";
+import {
+    type ReactNode,
+    useState,
+    cloneElement,
+    isValidElement,
+    type ReactElement,
+} from "react";
 
 // ** antd
-import { Button, Modal, Flex, type ModalProps } from "antd";
+import {Button, Modal, Flex, type ModalProps} from "antd";
 
 // ** i18n
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
-interface IModalAction extends Omit<ModalProps, "children" | "open" | "onCancel"> {
+// ** style
+import styles from "@/components/common/modal-action/modal.action.module.scss";
+
+// ** clsx
+import clsx from "clsx";
+
+interface IModalAction
+    extends Omit<ModalProps, "children" | "open" | "onCancel" | "onOk"> {
+    open?: boolean;
     icon?: ReactNode;
     children?: ReactNode;
     onOpen?: () => void;
     onCancel?: () => void;
-    onOk?: () => void;
+    onOk?: (...args: any[]) => void;
     danger?: boolean;
     type?: "default" | "delete";
     confirmLoading?: boolean;
     trigger?: ReactElement<{ onClick?: () => void }>;
+    formId?: string;
 }
 
 const ModalAction = ({
@@ -30,24 +45,28 @@ const ModalAction = ({
                          footer,
                          confirmLoading,
                          trigger,
+                         formId,
+                         open: controlledOpen,
                          ...modalProps
                      }: IModalAction) => {
-    const { t } = useTranslation();
-    const [open, setOpen] = useState(false);
+    const {t} = useTranslation();
+    const [internalOpen, setInternalOpen] = useState(false);
+
+    const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
 
     const handleOpen = () => {
-        setOpen(true);
+        setInternalOpen(true);
         onOpen?.();
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setInternalOpen(false);
         onCancel?.();
     };
 
-    const handleOk = async () => {
+    const handleOkClick = async () => {
         await onOk?.();
-        setOpen(false);
+        setInternalOpen(false);
     };
 
     const renderFooter = () => {
@@ -64,8 +83,10 @@ const ModalAction = ({
             <Button
                 type="primary"
                 danger={type === "delete"}
-                onClick={handleOk}
                 loading={confirmLoading}
+                htmlType={formId ? "submit" : "button"}
+                form={formId}
+                onClick={!formId ? handleOkClick : undefined}
             >
                 {type === "delete" ? t("table.delete") : t("table.ok")}
             </Button>
@@ -103,9 +124,13 @@ const ModalAction = ({
                 open={open}
                 onCancel={handleClose}
                 footer={renderFooter()}
+                centered
+                destroyOnHidden={true}
                 {...modalProps}
             >
-                {children}
+                <div className={clsx(styles.wrapper, "custom-scroll")}>
+                    {children}
+                </div>
             </Modal>
         </>
     );

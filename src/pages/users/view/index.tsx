@@ -22,9 +22,6 @@ import {Avatar, Flex, Space, Typography} from "antd";
 // ** i18n
 import type {TFunction} from "i18next";
 
-// ** utils
-import {getImageUrl} from "@/utils/getAvatarUrl.ts";
-
 // ** Dayjs
 import dayjs from "dayjs";
 
@@ -111,7 +108,7 @@ const UserDetail = ({id, t}: IUserDetail) => {
                         style={{left: infoUser?.avatar_frame ? undefined : '5%'}}
                     >
                         <div className={styles.avatarWrapper}>
-                            <Avatar className={styles.avatar} src={getImageUrl(infoUser?.avatar, 'avatar')}
+                            <Avatar className={styles.avatar} src={infoUser?.avatar}
                                     alt={infoUser?.name}/>
                             <div className={styles.frameWrapper}>
                                 {infoUser?.avatar_frame && (

@@ -30,3 +30,13 @@ export interface IUser {
     createdAt?: string;
     updatedAt?: string;
 }
+
+export interface IUpload {
+    "_id": string,
+    "slug": string,
+    "fileId": string,
+    "isDeleted": boolean,
+    "deletedAt": string,
+    "createdAt": string,
+    "updatedAt": string,
+}

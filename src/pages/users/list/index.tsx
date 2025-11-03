@@ -29,12 +29,13 @@ import {useTableSelection} from "@/hooks/useTableSelection.ts";
 
 import clsx from "clsx";
 // ** Icon
-import {ExportOutlined, ImportOutlined, PlusOutlined, ReloadOutlined} from "@ant-design/icons";
+import {ExportOutlined, ImportOutlined, ReloadOutlined} from "@ant-design/icons";
 
 // ** Page Components
 import {filterGroup} from "@/pages/users/components/filter-group";
 import {searchGroup} from "@/pages/users/components/search-group";
 import DeleteMultiUser from "@/pages/users/delete-multi";
+import CreateUser from "@/pages/users/create";
 
 const {Title} = Typography;
 
@@ -183,9 +184,7 @@ const UserList = () => {
                             />
                         </Col>
                         <Col>
-                            <Button icon={<PlusOutlined/>} type="primary">
-                                {t("user.create")}
-                            </Button>
+                            <CreateUser t={t}/>
                         </Col>
                     </Row>
                 </Col>
