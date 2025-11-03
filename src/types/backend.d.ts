@@ -17,6 +17,7 @@ export interface IUser {
     email: string;
     password?: string;
     avatar?: string
+    cover?: string
     avatar_frame?: string
     bio?: string;
     birthday?: string;
@@ -39,4 +40,10 @@ export interface IUpload {
     "deletedAt": string,
     "createdAt": string,
     "updatedAt": string,
+}
+
+export interface IRemoveMultiImg {
+    "success": boolean,
+    "deletedCount": number,
+    "slugs": string[],
 }

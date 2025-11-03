@@ -88,6 +88,10 @@
       "cover": "Cover",
       "created_success": "User created successfully."
     },
+    "update": {
+      "title": "Update User",
+      "updated_success": "User updated successfully."
+    },
     "filter": {
       "gender": "Filter by gender",
       "age": "Filter by age",

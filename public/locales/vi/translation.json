@@ -88,6 +88,10 @@
       "cover": "Ảnh bìa",
       "created_success": "Tạo người dùng thành công."
     },
+    "update": {
+      "title": "Cập nhật tài khoản",
+      "updated_success": "Cập nhật người dùng thành công."
+    },
     "filter": {
       "gender": "Lọc theo giới tính",
       "age": "Lọc theo tuổi",

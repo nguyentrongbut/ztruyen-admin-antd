@@ -33,5 +33,8 @@ export const UserService = {
     },
     add: async (payload: any) => {
         return await axios.post<IBackendRes<IUser>>(CONFIG_API.USER.INDEX, payload)
+    },
+    update: async (id: string, payload: any) => {
+        return await axios.patch(`${CONFIG_API.USER.UPDATE}/${id}`, payload)
     }
 };

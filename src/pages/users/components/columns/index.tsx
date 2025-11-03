@@ -2,7 +2,7 @@
 import type {TFunction} from "i18next";
 
 // ** antd
-import {Button, Space, Tag} from "antd";
+import {Space, Tag} from "antd";
 import type {TableProps} from "antd";
 
 // ** Type
@@ -11,12 +11,10 @@ import type {IUser} from "@/types/backend";
 // ** Dayjs
 import dayjs from "dayjs";
 
-// ** utils
-import { EditOutlined} from "@ant-design/icons";
-
 // ** Page components
 import UserDetail from "@/pages/users/view";
 import DeleteUser from "@/pages/users/delete";
+import UpdateUser from "@/pages/users/update";
 
 export const listUserColumns = (
     t: TFunction
@@ -116,11 +114,7 @@ export const listUserColumns = (
             render: (_, record) => (
                 <Space size="middle">
                     <UserDetail id={record?._id as string} t={t}/>
-                    <Button
-                        type="text"
-                        icon={<EditOutlined/>}
-                        onClick={() => console.log("update", record._id)}
-                    />
+                    <UpdateUser id={record?._id as string} t={t}/>
                     <DeleteUser id={record._id as string} t={t} name={record?.name}/>
                 </Space>
             ),

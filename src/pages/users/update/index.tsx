@@ -1,8 +1,8 @@
 // ** React
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 // ** React Query
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 
 // ** antd
 import {
@@ -20,7 +20,7 @@ import {
 } from "antd";
 
 // ** Icon
-import {PlusOutlined, UploadOutlined} from "@ant-design/icons";
+import {EditOutlined, UploadOutlined} from "@ant-design/icons";
 
 // ** i18n
 import type {TFunction} from "i18next";
@@ -50,15 +50,20 @@ import {UserService} from "@/services/user";
 import {handleResponse} from "@/utils/handleResponse.ts";
 import {getExactAge} from "@/utils/dayjsHelper.ts";
 import {type FileType, getBase64} from "@/utils/getBase64.ts";
+import {imgHelper, isInternalImage} from "@/utils/imgHelper.ts";
 
-interface ICreateUser {
+// ** Types
+import type {IUser} from "@/types/backend";
+
+interface IUpdateUser {
     t: TFunction;
+    id: string
 }
 
 const {Item} = Form;
 const {TextArea} = Input;
 
-const CreateUser = ({t}: ICreateUser) => {
+const UpdateUser = ({t, id}: IUpdateUser) => {
     const [avatar, setAvatar] = useState<UploadFile[]>([]);
     const [cover, setCover] = useState<UploadFile[]>([]);
 
@@ -68,24 +73,54 @@ const CreateUser = ({t}: ICreateUser) => {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const [form] = Form.useForm();
-
     const {notification, message} = App.useApp()
 
     const queryClient = useQueryClient();
 
-    const addUserMutation = useMutation({
+    const {data, isLoading} = useQuery({
+        queryKey: ["getDetailUser", id],
+        queryFn: async () => {
+            try {
+                const res = await UserService.getDetailUser(id);
+                return handleResponse<IUser>(res)
+            } catch (err: any) {
+                notification.error({
+                    message: t("error_general"),
+                    description: Array.isArray(err.message)
+                        ? err.message[0]
+                        : err.message || t("error_general"),
+                    duration: 5,
+                });
+            }
+        },
+        enabled: open,
+        retry: false,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+    });
+
+    const infoUser = data?.data;
+
+    const resetAvatarCover = (user?: IUser) => {
+        setAvatar(user?.avatar ? [{uid: "-1", name: "avatar", status: "done", url: user.avatar}] : []);
+        setCover(user?.cover ? [{uid: "-2", name: "cover", status: "done", url: user.cover}] : []);
+    };
+
+    useEffect(() => {
+        resetAvatarCover(infoUser);
+    }, [infoUser])
+
+    const updateUserMutation = useMutation({
         mutationFn: async (payload) => {
-            const res = await UserService.add(payload);
+            const res = await UserService.update(id, payload);
             return handleResponse(res)
         },
         onSuccess: async (res) => {
             if (res.data) {
-                message.success(t("user.create.created_success"));
+                message.success(t("user.update.updated_success"));
                 await queryClient.invalidateQueries({queryKey: ["getListUser"]});
-                form.resetFields();
-                setAvatar([]);
-                setCover([]);
+                await queryClient.invalidateQueries({queryKey: ["getDetailUser", id]});
+                resetAvatarCover(infoUser);
                 setOpen(false);
             }
         },
@@ -118,6 +153,17 @@ const CreateUser = ({t}: ICreateUser) => {
         const email = values.email;
         setLoading(true);
         try {
+            // remove old img
+            const slugsToRemove = [
+                isInternalImage(infoUser?.avatar) ? imgHelper(infoUser?.avatar) : null,
+                isInternalImage(infoUser?.cover) ? imgHelper(infoUser?.cover) : null,
+            ].filter(Boolean) as string[];
+
+            if (slugsToRemove.length > 0) {
+                await UploadService.removeMultiImg(slugsToRemove);
+            }
+
+            // upload new img
             const [avatarUpload, coverUpload] = await Promise.all([
                 avatar[0]?.originFileObj
                     ? UploadService.uploadImg(avatar[0].originFileObj, email)
@@ -137,7 +183,7 @@ const CreateUser = ({t}: ICreateUser) => {
                 cover: coverSlug,
             };
 
-            await addUserMutation.mutateAsync(payload);
+            await updateUserMutation.mutateAsync(payload);
 
         } catch (err) {
             console.error(err);
@@ -168,28 +214,38 @@ const CreateUser = ({t}: ICreateUser) => {
 
     return (
         <ModalAction
-            title={t("user.create.title")}
+            title={t("user.update.title")}
             trigger={
-                <Button icon={<PlusOutlined/>} type="primary">
-                    {t("user.create.title")}
-                </Button>
+                <Button
+                    type="text"
+                    icon={<EditOutlined/>}
+                    onClick={() => console.log("update", id)}
+                />
             }
-            formId="createUserForm"
+            formId="updateUserForm"
             confirmLoading={loading}
             open={open}
+            loading={isLoading}
             onOpen={() => setOpen(true)}
             onCancel={() => {
                 setOpen(false);
-                setAvatar([]);
-                setCover([]);
+                resetAvatarCover(infoUser);
             }}
         >
             <Form
-                id="createUserForm"
+                key={infoUser?._id}
+                id="updateUserForm"
                 onFinish={handleSubmit}
                 layout="vertical"
                 scrollToFirstError
-                className="w-full mt-10">
+                className="w-full mt-10"
+                initialValues={
+                    {
+                        ...infoUser,
+                        birthday: infoUser?.birthday ? dayjs(infoUser.birthday) : undefined,
+                    }
+                }
+            >
                 {/* Avatar */}
                 <Item label={t("user.create.avatar")}>
                     <Flex justify="center" align="center">
@@ -243,17 +299,6 @@ const CreateUser = ({t}: ICreateUser) => {
                     ]}
                 >
                     <Input placeholder={t('user.placeholder.email')}/>
-                </Item>
-
-                <Item
-                    name="password"
-                    label={t("user.columns.password")}
-                    rules={[
-                        {required: true, message: t("user.validation.passwordRequired")},
-                        {min: 6, message: t("user.validation.passwordMin")},
-                    ]}
-                >
-                    <Input.Password placeholder={t("user.placeholder.password")}/>
                 </Item>
 
                 <Item
@@ -319,4 +364,4 @@ const CreateUser = ({t}: ICreateUser) => {
     );
 };
 
-export default CreateUser;
+export default UpdateUser;

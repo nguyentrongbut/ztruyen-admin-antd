@@ -5,7 +5,7 @@ import axios from "@/services/axios-customize";
 import {CONFIG_API} from "@/configs/apis";
 
 // ** Types
-import type {IUpload} from "@/types/backend";
+import type {IRemoveMultiImg, IUpload} from "@/types/backend";
 
 export const UploadService = {
     uploadImg: (file: File, caption: string) => {
@@ -19,4 +19,12 @@ export const UploadService = {
             },
         });
     },
+    removeImg: (slug: string) => {
+        return axios.delete<IBackendRes<IRemoveMultiImg>>(`${CONFIG_API.UPLOAD.IMAGE}/${slug}`)
+    },
+    removeMultiImg: (slugs: string[]) => {
+        return axios.delete<IBackendRes<IRemoveMultiImg>>(CONFIG_API.UPLOAD.IMAGE, {
+            data: {slugs}
+        })
+    }
 }

@@ -11,6 +11,7 @@ export const CONFIG_API = {
         DETAIL: 'users/detail',
         DELETE: 'users/delete',
         DELETE_MULTI: 'users/delete-multi',
+        UPDATE: 'users/update',
     },
     UPLOAD: {
         ONE: '/upload-telegram/upload',
