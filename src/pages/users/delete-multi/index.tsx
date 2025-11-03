@@ -16,6 +16,9 @@ import {UserService} from "@/services/user";
 // ** Components
 import ModalAction from "@/components/common/modal-action";
 
+// ** utils
+import {handleResponse} from "@/utils/handleResponse.ts";
+
 interface IDeleteMultiUser {
     ids: string[];
     t: TFunction;
@@ -28,21 +31,27 @@ const DeleteMultiUser = ({ids, t, onClearSelection}: IDeleteMultiUser) => {
     const {message, notification} = App.useApp();
 
     const deleteMultiUserMutation = useMutation({
-        mutationFn: (ids: string[]) => UserService.removeMultiUser(ids),
+        mutationFn: async () => {
+            const res = await UserService.removeMultiUser(ids)
+            return handleResponse(res)
+        },
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ["getListUser"]});
             message.success(t("user.delete_multi.deleted_success"));
         },
-        onError: (error: any) => {
+        onError: (err) => {
             notification.error({
                 message: t("error_general"),
-                description: error?.response?.data?.message || t("user.delete_multi.deleted_fail"),
+                description: Array.isArray(err.message)
+                    ? err.message[0]
+                    : err.message || t("error_general"),
+                duration: 5,
             });
         },
     });
 
     const handleDelete = async () => {
-        await deleteMultiUserMutation.mutateAsync(ids);
+        await deleteMultiUserMutation.mutateAsync();
         onClearSelection?.();
     };
 

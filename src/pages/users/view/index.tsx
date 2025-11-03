@@ -17,13 +17,19 @@ import {UserService} from "@/services/user";
 import styles from '@/pages/users/view/user.detail.module.scss'
 
 // ** antd
-import {Avatar, Flex, Space, Typography} from "antd";
+import {App, Avatar, Flex, Space, Typography} from "antd";
 
 // ** i18n
 import type {TFunction} from "i18next";
 
 // ** Dayjs
 import dayjs from "dayjs";
+
+// ** utils
+import {handleResponse} from "@/utils/handleResponse.ts";
+
+// ** Types
+import type {IUser} from "@/types/backend";
 
 interface IUserDetail {
     id: string;
@@ -41,17 +47,31 @@ const UserDetail = ({id, t}: IUserDetail) => {
 
     const [visible, setVisible] = useState(false);
 
+    const {notification} = App.useApp()
+
     const {data, isLoading} = useQuery({
         queryKey: ["getDetailUser", id],
-        queryFn: () =>
-            UserService.getDetailUser(id),
+        queryFn: async () => {
+            try {
+                const res = await UserService.getDetailUser(id);
+                return handleResponse<IUser>(res)
+            } catch (err: any) {
+                notification.error({
+                    message: t("error_general"),
+                    description: Array.isArray(err.message)
+                        ? err.message[0]
+                        : err.message || t("error_general"),
+                    duration: 5,
+                });
+            }
+        },
         enabled: visible,
         retry: false,
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
     });
 
-    const infoUser = data?.data
+    const infoUser = data?.data;
 
     const listDetail: IListDetail[] = [
         {

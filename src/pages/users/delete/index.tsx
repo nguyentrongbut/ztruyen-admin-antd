@@ -16,6 +16,9 @@ import {UserService} from "@/services/user";
 // ** i18n
 import type {TFunction} from "i18next";
 
+// ** utils
+import {handleResponse} from "@/utils/handleResponse.ts";
+
 interface IDeleteUser {
     id: string;
     name: string;
@@ -27,21 +30,27 @@ const DeleteUser = ({id, name, t}: IDeleteUser) => {
     const {message, notification} = App.useApp();
 
     const deleteUserMutation = useMutation({
-        mutationFn: (id: string) => UserService.removeUser(id),
+        mutationFn: async () => {
+            const res = await UserService.remove(id);
+            return handleResponse(res)
+        },
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ["getListUser"]});
             message.success(t("user.delete.deleted_success"));
         },
-        onError: (error: any) => {
+        onError: (err) => {
             notification.error({
                 message: t("error_general"),
-                description: error?.response?.data?.message || t("user.delete.deleted_fail"),
+                description: Array.isArray(err.message)
+                    ? err.message[0]
+                    : err.message || t("error_general"),
+                duration: 5,
             });
         },
     });
 
     const handleDelete = async () => {
-        await deleteUserMutation.mutateAsync(id);
+        await deleteUserMutation.mutateAsync();
     };
 
     return (
