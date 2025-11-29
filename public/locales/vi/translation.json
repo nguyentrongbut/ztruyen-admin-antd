@@ -173,5 +173,13 @@
     "select_none": "Bỏ chọn",
     "select_odd_rows": "Chọn hàng lẻ",
     "select_even_rows": "Chọn hàng chẵn"
+  },
+  "upload": {
+    "drag_click": "Nhấn hoặc kéo thả file vào khu vực này để tải lên",
+    "only_excel": "Chỉ hỗ trợ file Excel (.xlsx, .xls). Không tải lên dữ liệu nhạy cảm.",
+    "error_invalid_file": "Tập tin không hợp lệ. Vui lòng chọn file Excel.",
+    "file_required": "Vui lòng chọn file cần nhập.",
+    "export_template": "Tải xuống file mẫu",
+    "loading": "Đang tải ..."
   }
 }

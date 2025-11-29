@@ -173,5 +173,13 @@
     "select_none": "Clear Selection",
     "select_odd_rows": "Select Odd Rows",
     "select_even_rows": "Select Even Rows"
+  },
+  "upload": {
+    "drag_click": "Click or drag file to this area to upload",
+    "only_excel": "Only Excel files (.xlsx, .xls) are supported. Do not upload sensitive data.",
+    "error_invalid_file": "Invalid file. Please select an Excel file.",
+    "file_required": "Please select a file to import.",
+    "export_template": "Download template",
+    "loading": "Loading..."
   }
 }

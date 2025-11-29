@@ -29,13 +29,14 @@ import {useTableSelection} from "@/hooks/useTableSelection.ts";
 
 import clsx from "clsx";
 // ** Icon
-import {ExportOutlined, ImportOutlined, ReloadOutlined} from "@ant-design/icons";
+import {ExportOutlined, ReloadOutlined} from "@ant-design/icons";
 
 // ** Page Components
 import {filterGroup} from "@/pages/users/components/filter-group";
 import {searchGroup} from "@/pages/users/components/search-group";
 import DeleteMultiUser from "@/pages/users/delete-multi";
 import CreateUser from "@/pages/users/create";
+import ImportUsers from "@/pages/users/import";
 
 const {Title} = Typography;
 
@@ -70,6 +71,7 @@ const UserList = () => {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(true);
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
     const [resetSignal, setResetSignal] = useState(Date.now());
+    const [loadingExport, setLoadingExport] = useState(false);
 
     const {queryParams, handleTableChange, setQueryParams} = useTableQueryParams<IUser, IUserQueryParams>({
         page: 1,
@@ -142,6 +144,17 @@ const UserList = () => {
         setResetSignal(Date.now());
     };
 
+    const handleExport = async () => {
+        setLoadingExport(true);
+        try {
+            await UserService.export(query);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoadingExport(false);
+        }
+    };
+
     return (
         <Space direction='vertical' size={24} style={{width: "100%"}}>
             {/* Header */}
@@ -165,15 +178,20 @@ const UserList = () => {
                             </Button>
                         </Col>
                         <Col>
-                            <Button icon={<ExportOutlined/>}>
+                            <Button
+                                icon={<ExportOutlined/>}
+                                onClick={handleExport}
+                                loading={loadingExport}
+                                disabled={loadingExport}
+                            >
                                 {t("table.export")}
                             </Button>
                         </Col>
 
                         <Col>
-                            <Button icon={<ImportOutlined/>}>
-                                {t("table.import")}
-                            </Button>
+                            <ImportUsers
+                                t={t}
+                            />
                         </Col>
 
                         <Col>

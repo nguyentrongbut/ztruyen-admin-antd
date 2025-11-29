@@ -6,6 +6,7 @@ import type {IUser} from "@/types/backend";
 
 // ** Configs
 import {CONFIG_API} from "@/configs/apis";
+import {ExportService} from "@/services/export";
 
 export const UserService = {
     profile: () => axios.get<IBackendRes<IUser>>(CONFIG_API.USER.PROFILE),
@@ -36,5 +37,22 @@ export const UserService = {
     },
     update: async (id: string, payload: any) => {
         return await axios.patch(`${CONFIG_API.USER.UPDATE}/${id}`, payload)
-    }
+    },
+
+    export: async (query: string) => {
+        await ExportService.export(`${CONFIG_API.USER.EXPORT}?${query}`, 'users.xlsx')
+    },
+    exportTemplate: async (fileName = "import_template.xlsx") => {
+        await ExportService.export(CONFIG_API.USER.EXPORT_TEMPLATE, fileName);
+    },
+    import: (file: File) => {
+        const formData = new FormData();
+        formData.append("file", file)
+
+        return axios.post(CONFIG_API.USER.IMPORT, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+    },
 };

@@ -17,10 +17,10 @@ import DeleteUser from "@/pages/users/delete";
 import UpdateUser from "@/pages/users/update";
 
 export const listUserColumns = (
-    t: TFunction
+    t: TFunction,
+    action: boolean = true,
 ): TableProps<IUser>["columns"] => {
-
-    return [
+    const columns: TableProps<IUser>["columns"] = [
         {
             title: t("user.columns.name"),
             dataIndex: "name",
@@ -47,10 +47,7 @@ export const listUserColumns = (
             dataIndex: "gender",
             key: "gender",
             render: (text: string) => {
-                if (!text) {
-                    return <Tag>{t('user.columns.notSet')}</Tag>;
-                }
-
+                if (!text) return <Tag>{t('user.columns.notSet')}</Tag>;
                 const color = text === "male" ? "blue" : "pink";
                 return <Tag color={color}>{t(`user.genders.${text}`)}</Tag>;
             },
@@ -71,7 +68,6 @@ export const listUserColumns = (
             key: "provider",
             render: (text: string) => {
                 let color = "";
-
                 switch (text) {
                     case "local":
                         color = "default";
@@ -85,7 +81,6 @@ export const listUserColumns = (
                     default:
                         color = "purple";
                 }
-
                 return <Tag color={color}>{t(`user.providers.${text}`)}</Tag>;
             },
         },
@@ -107,17 +102,23 @@ export const listUserColumns = (
             render: (text: string) =>
                 dayjs(text).format("DD-MM-YYYY HH:mm:ss"),
         },
-        {
+    ];
+
+    if (action) {
+        columns.push({
             title: t("user.columns.action"),
             key: "action",
             fixed: "right",
             render: (_, record) => (
                 <Space size="middle">
-                    <UserDetail id={record?._id as string} t={t}/>
-                    <UpdateUser id={record?._id as string} t={t}/>
-                    <DeleteUser id={record._id as string} t={t} name={record?.name}/>
+                    <UserDetail id={record?._id as string} t={t} />
+                    <UpdateUser id={record?._id as string} t={t} />
+                    <DeleteUser id={record._id as string} t={t} name={record?.name} />
                 </Space>
             ),
-        },
-    ];
+        });
+    }
+
+    return columns;
 }
+
