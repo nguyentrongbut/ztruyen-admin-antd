@@ -39,6 +39,41 @@ export const UserService = {
         return await axios.patch(`${CONFIG_API.USER.UPDATE}/${id}`, payload)
     },
 
+    //  trash
+    listTrash: async (query: string) => {
+        return await axios.get<IBackendRes<IModelPaginate<IUser>>>(
+            `${CONFIG_API.USER.TRASH}?${query}`
+        );
+    },
+    detailTrash: async (id: string) => {
+        return await axios.get<IBackendRes<IUser>>(
+            `${CONFIG_API.USER.TRASH}/${id}`
+        );
+    },
+    hardRemove: async (id: string) => {
+        return await axios.delete(
+            `${CONFIG_API.USER.HARD_DELETE}/${id}`
+        );
+    },
+    hardRemoveMulti: async (ids: string[]) => {
+        return await axios.delete(
+            CONFIG_API.USER.HARD_DELETE_MULTI, {
+                data: {ids},
+            }
+        );
+    },
+    restore: async (id: string) => {
+        return await axios.patch(
+            `${CONFIG_API.USER.RESTORE}/${id}`
+        );
+    },
+    restoreMulti: async (ids: string[]) => {
+        return await axios.patch(
+            CONFIG_API.USER.RESTORE_MULTI, {ids}
+        );
+    },
+
+    // import/export
     export: async (query: string) => {
         await ExportService.export(`${CONFIG_API.USER.EXPORT}?${query}`, 'users.xlsx')
     },

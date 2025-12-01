@@ -8,10 +8,7 @@ import type {TFunction} from "i18next";
 import {App, Button, Space, Typography} from "antd";
 
 // ** Icon
-import {DeleteOutlined} from "@ant-design/icons";
-
-// ** Services
-import {UserService} from "@/services/user";
+import {DeleteOutlined, RollbackOutlined} from "@ant-design/icons";
 
 // ** Components
 import ModalAction from "@/components/common/modal-action";
@@ -19,25 +16,35 @@ import ModalAction from "@/components/common/modal-action";
 // ** utils
 import {handleResponse} from "@/utils/handleResponse.ts";
 
-interface IDeleteMultiUser {
+interface IDeleteRestoreMultiActions {
     ids: string[];
     t: TFunction;
     onClearSelection?: () => void;
+    title: string;
+    desc: string;
+    messageSuccess: string;
+    api: (id: string[]) => Promise<any>;
+    queryKey: readonly unknown[];
+    action?: "delete" | "restore";
 }
 
-const DeleteMultiUser = ({ids, t, onClearSelection}: IDeleteMultiUser) => {
+const DeleteRestoreMultiActions = ({ids, t, onClearSelection, title, desc, messageSuccess, api, action = "delete", queryKey}: IDeleteRestoreMultiActions) => {
 
     const queryClient = useQueryClient();
     const {message, notification} = App.useApp();
 
-    const deleteMultiUserMutation = useMutation({
+    const isDelete = action === "delete";
+    const icon = action === "delete" ? <DeleteOutlined/> : <RollbackOutlined/>;
+    const titleBtn = action === "delete" ? t("table.delete_selected") : t("table.restore_selected");
+
+    const deleteRestoreMultiActionsMutation = useMutation({
         mutationFn: async () => {
-            const res = await UserService.removeMulti(ids)
+            const res = await api(ids)
             return handleResponse(res)
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ["getListUser"]});
-            message.success(t("user.delete_multi.deleted_success"));
+            queryClient.invalidateQueries({queryKey});
+            message.success(messageSuccess);
         },
         onError: (err) => {
             notification.error({
@@ -51,36 +58,36 @@ const DeleteMultiUser = ({ids, t, onClearSelection}: IDeleteMultiUser) => {
     });
 
     const handleDelete = async () => {
-        await deleteMultiUserMutation.mutateAsync();
+        await deleteRestoreMultiActionsMutation.mutateAsync();
         onClearSelection?.();
     };
 
     return (
         <ModalAction
-            danger
-            type='delete'
+            danger={isDelete}
+            type={action}
             maskClosable={false}
             keyboard={false}
-            icon={<DeleteOutlined/>}
-            title={`${t("user.delete_multi.title")}`}
+            icon={icon}
+            title={title}
             onOk={handleDelete}
             centered
-            confirmLoading={deleteMultiUserMutation.isPending}
+            confirmLoading={deleteRestoreMultiActionsMutation.isPending}
             trigger={
                 <Button
-                    color='danger'
+                    color={isDelete ? 'danger' : 'primary'}
                     variant='solid'
                     disabled={ids.length < 2}
-                    icon={<DeleteOutlined/>}>
-                    {t("table.delete_selected")}
+                    icon={icon}>
+                    {titleBtn}
                 </Button>
             }
         >
             <Space align="start">
-                <Typography.Text>{t("user.delete_multi.desc")}</Typography.Text>
+                <Typography.Text>{desc}</Typography.Text>
             </Space>
         </ModalAction>
     )
 }
 
-export default DeleteMultiUser
+export default DeleteRestoreMultiActions

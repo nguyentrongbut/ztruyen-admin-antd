@@ -10,11 +10,8 @@ import ModalAction from "@/components/common/modal-action";
 // ** Icon
 import {EyeOutlined} from "@ant-design/icons";
 
-// ** Services
-import {UserService} from "@/services/user";
-
 // ** style
-import styles from '@/pages/users/view/user.detail.module.scss'
+import styles from '@/pages/users/components/view/user.detail.module.scss'
 
 // ** antd
 import {App, Avatar, Flex, Space, Typography} from "antd";
@@ -33,7 +30,8 @@ import type {IUser} from "@/types/backend";
 
 interface IUserDetail {
     id: string;
-    t: TFunction
+    t: TFunction;
+    fetchDetail: (id: string) => Promise<any>;
 }
 
 interface IListDetail {
@@ -43,7 +41,7 @@ interface IListDetail {
 
 const {Text, Title} = Typography;
 
-const UserDetail = ({id, t}: IUserDetail) => {
+const UserDetail = ({id, t, fetchDetail}: IUserDetail) => {
 
     const [visible, setVisible] = useState(false);
 
@@ -53,7 +51,7 @@ const UserDetail = ({id, t}: IUserDetail) => {
         queryKey: ["getDetailUser", id],
         queryFn: async () => {
             try {
-                const res = await UserService.detail(id);
+                const res = await fetchDetail(id);
                 return handleResponse<IUser>(res)
             } catch (err: any) {
                 notification.error({

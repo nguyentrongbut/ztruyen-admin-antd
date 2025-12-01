@@ -11,14 +11,18 @@ import type {IUser} from "@/types/backend";
 // ** Dayjs
 import dayjs from "dayjs";
 
+// ** Services
+import {UserService} from "@/services/user";
+
 // ** Page components
-import UserDetail from "@/pages/users/view";
-import DeleteUser from "@/pages/users/delete";
+import UserDetail from "@/pages/users/components/view";
 import UpdateUser from "@/pages/users/update";
+import DeleteRestoreActions from "@/components/common/delete-restore-actions";
 
 export const listUserColumns = (
     t: TFunction,
     action: boolean = true,
+    trash: boolean = false,
 ): TableProps<IUser>["columns"] => {
     const columns: TableProps<IUser>["columns"] = [
         {
@@ -94,7 +98,7 @@ export const listUserColumns = (
                 dayjs(text).format("DD-MM-YYYY HH:mm:ss"),
         },
         {
-            title: t("user.columns.updatedAt"),
+            title: trash ? t('user.columns.deletedAt') : t("user.columns.updatedAt"),
             dataIndex: "updatedAt",
             key: "updatedAt",
             sorter: true,
@@ -111,9 +115,52 @@ export const listUserColumns = (
             fixed: "right",
             render: (_, record) => (
                 <Space size="middle">
-                    <UserDetail id={record?._id as string} t={t} />
-                    <UpdateUser id={record?._id as string} t={t} />
-                    <DeleteUser id={record._id as string} t={t} name={record?.name} />
+                    {trash ? (
+                        <>
+                            <UserDetail
+                                id={record?._id as string}
+                                t={t}
+                                fetchDetail={UserService.detailTrash}
+                            />
+                            <DeleteRestoreActions
+                                id={record._id as string}
+                                t={t} name={record?.name}
+                                title={t("user.restore.title")}
+                                desc={t("user.restore.desc")}
+                                messageSuccess={t("user.delete.deleted_success")}
+                                api={UserService.restore}
+                                queryKey={["getListTrashUser"]}
+                                action='restore'
+                            />
+                            <DeleteRestoreActions
+                                id={record._id as string}
+                                t={t} name={record?.name}
+                                title={t("user.delete.title")}
+                                desc={t("user.delete.hard_desc")}
+                                messageSuccess={t("user.delete.deleted_success")}
+                                api={UserService.hardRemove}
+                                queryKey={["getListTrashUser"]}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <UserDetail
+                                id={record?._id as string}
+                                t={t}
+                                fetchDetail={UserService.detail}
+                            />
+                            <UpdateUser id={record?._id as string} t={t}/>
+                            <DeleteRestoreActions
+                                id={record._id as string} t={t}
+                                name={record?.name}
+                                api={UserService.remove}
+                                title={t("user.delete.title")}
+                                desc={t("user.delete.desc")}
+                                messageSuccess={t("user.delete.deleted_success")}
+                                queryKey={["getListUser"]}
+                            />
+                        </>
+                    )}
                 </Space>
             ),
         });

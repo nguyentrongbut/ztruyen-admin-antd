@@ -23,6 +23,7 @@
       "title": "Người dùng",
       "list": "Danh sách người dùng",
       "trash": "Thùng rác",
+      "list_trash": "Danh sách người dùng đã xoá",
       "reports": "Báo cáo người dùng"
     },
     "stories": {
@@ -65,6 +66,7 @@
       "provider": "Loại tài khoản",
       "createdAt": "Ngày tạo",
       "updatedAt": "Ngày cập nhật",
+      "deletedAt": "Ngày xoá",
       "action": "Thao tác",
       "notSet": "Chưa cập nhật",
       "password": "Mật khẩu"
@@ -99,6 +101,7 @@
       "provider": "Lọc theo loại tài khoản",
       "createdAt": "Lọc theo ngày tạo",
       "updatedAt": "Lọc theo ngày cập nhật",
+      "deletedAt": "Lọc theo ngày xoá",
       "choose": {
         "gender": "Chọn giới tính",
         "role": "Chọn vai trò",
@@ -116,14 +119,26 @@
     "delete": {
       "title": "Bạn có chắc chắn muốn xóa người dùng",
       "desc": "Hành động này có thể hoàn tác. Dữ liệu của người dùng sẽ bị xóa ở phía người dùng.",
+      "hard_desc": "Hành động này không thể hoàn tác. Tất cả dữ liệu liên quan đến người dùng sẽ bị xóa khỏi hệ thống và không thể phục hồi.",
       "deleted_success": "Xóa người dùng thành công.",
       "deleted_fail": "Xóa người dùng thất bại. Vui lòng thử lại."
     },
     "delete_multi": {
       "title": "Bạn có chắc chắn muốn xóa nhiều người dùng không?",
       "desc": "Hành động này có thể hoàn tác. Dữ liệu của nhiều người dùng sẽ bị xóa ở phía người dùng.",
+      "hard_desc": "Hành động này không thể hoàn tác. Tất cả dữ liệu liên quan đến người dùng sẽ bị xóa khỏi hệ thống và không thể khôi phục.",
       "deleted_success": "Xóa nhiều người dùng thành công.",
       "deleted_fail": "Xóa nhiều người dùng thất bại. Vui lòng thử lại."
+    },
+    "restore": {
+      "title": "Bạn có chắc chắn muốn khôi phục người dùng",
+      "desc": "Người dùng sẽ được khôi phục về trạng thái hoạt động và có thể truy cập hệ thống trở lại.",
+      "restored_success": "Khôi phục người dùng thành công."
+    },
+    "restore_multi": {
+      "title": "Bạn có chắc chắn muốn khôi phục nhiều người dùng?",
+      "desc": "Các người dùng đã chọn sẽ được khôi phục về trạng thái hoạt động và có thể truy cập hệ thống trở lại.",
+      "restored_success": "Khôi phục nhiều người dùng thành công."
     },
     "placeholder": {
       "name": "Nhập họ và tên",
@@ -155,6 +170,7 @@
     "export": "Xuất dữ liệu",
     "import": "Nhập dữ liệu",
     "delete_selected": "Xóa nhiều",
+    "restore_selected": "Khôi phục nhiều",
     "filter_options": "Tùy chọn lọc",
     "basic_filters": "Bộ lọc cơ bản",
     "advanced_filters": "Bộ lọc nâng cao",

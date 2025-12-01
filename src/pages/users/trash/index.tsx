@@ -29,13 +29,11 @@ import {useTableSelection} from "@/hooks/useTableSelection.ts";
 
 import clsx from "clsx";
 // ** Icon
-import {ExportOutlined, ReloadOutlined} from "@ant-design/icons";
+import { ReloadOutlined} from "@ant-design/icons";
 
 // ** Page Components
 import {filterGroup} from "@/pages/users/components/filter-group";
 import {searchGroup} from "@/pages/users/components/search-group";
-import CreateUser from "@/pages/users/create";
-import ImportUsers from "@/pages/users/import";
 import DeleteRestoreMultiActions from "@/components/common/delete-restore-multi-actions";
 
 const {Title} = Typography;
@@ -59,7 +57,7 @@ export interface IUserQueryParams {
     "age>"?: string;
 }
 
-const UserList = () => {
+const TrashUserList = () => {
 
     const {t} = useTranslation();
 
@@ -71,12 +69,11 @@ const UserList = () => {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(true);
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
     const [resetSignal, setResetSignal] = useState(Date.now());
-    const [loadingExport, setLoadingExport] = useState(false);
 
     const {queryParams, handleTableChange, setQueryParams} = useTableQueryParams<IUser, IUserQueryParams>({
         page: 1,
         limit: 10,
-        sort: "-createdAt",
+        sort: "-deletedAt",
         name: "",
         email: "",
         role: "",
@@ -87,18 +84,18 @@ const UserList = () => {
         updatedAt: ""
     });
 
-    const query = qs.stringify(queryParams, {skipNull: true, skipEmptyString: true});
-
     //  call api
     const {data} = useQuery({
-        queryKey: ["getListUser", queryParams],
+        queryKey: ["getListTrashUser", queryParams],
         queryFn: () =>
-            UserService.list(query),
+            UserService.listTrash(query),
         placeholderData: keepPreviousData,
         retry: false,
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
     });
+
+    const query = qs.stringify(queryParams, {skipNull: true, skipEmptyString: true});
 
     const listUser = data?.data?.result
 
@@ -144,28 +141,17 @@ const UserList = () => {
         setResetSignal(Date.now());
     };
 
-    const handleExport = async () => {
-        setLoadingExport(true);
-        try {
-            await UserService.export(query);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoadingExport(false);
-        }
-    };
-
     return (
         <Space direction='vertical' size={24} className='w-full'>
             {/* Header */}
             <Breadcrumb
-                items={[{title: t('menu.users.title')}, {title: t('menu.users.list')}]}
+                items={[{title: t('menu.users.title')}, {title: t('menu.users.list_trash')}]}
             />
             <Row justify="space-between" align="middle" gutter={[16, 16]}>
                 {/* Title */}
                 <Col>
                     <Title className={clsx(styles.title, styles.wrapper)} style={{margin: 0}}>
-                        {t('menu.users.list')}
+                        {t('menu.users.list_trash')}
                     </Title>
                 </Col>
 
@@ -177,20 +163,18 @@ const UserList = () => {
                                 {t("table.refresh")}
                             </Button>
                         </Col>
-                        <Col>
-                            <Button
-                                icon={<ExportOutlined/>}
-                                onClick={handleExport}
-                                loading={loadingExport}
-                                disabled={loadingExport}
-                            >
-                                {t("table.export")}
-                            </Button>
-                        </Col>
 
                         <Col>
-                            <ImportUsers
+                            <DeleteRestoreMultiActions
                                 t={t}
+                                ids={selectedRowKeys as string[]}
+                                onClearSelection={() => setSelectedRowKeys([])}
+                                api={UserService.restoreMulti}
+                                queryKey={['getListTrashUser']}
+                                title={t("user.restore_multi.title")}
+                                desc={t("user.restore_multi.desc")}
+                                messageSuccess={t("user.restore_multi.deleted_success")}
+                                action='restore'
                             />
                         </Col>
 
@@ -199,15 +183,12 @@ const UserList = () => {
                                 t={t}
                                 ids={selectedRowKeys as string[]}
                                 onClearSelection={() => setSelectedRowKeys([])}
-                                api={UserService.removeMulti}
-                                queryKey={['getListUser']}
+                                api={UserService.hardRemoveMulti}
+                                queryKey={['getListTrashUser']}
                                 title={t("user.delete_multi.title")}
-                                desc={t("user.delete_multi.desc")}
+                                desc={t("user.delete_multi.hard_desc")}
                                 messageSuccess={t("user.delete_multi.deleted_success")}
                             />
-                        </Col>
-                        <Col>
-                            <CreateUser t={t}/>
                         </Col>
                     </Row>
                 </Col>
@@ -222,18 +203,17 @@ const UserList = () => {
 
             {/* Collapse Filter */}
             <Collapse
-                items={filterGroup(t, queryParams, setQueryParams, resetSignal, setResetSignal, colorPrimary)}
+                items={filterGroup(t, queryParams, setQueryParams, resetSignal, setResetSignal, colorPrimary, true)}
                 activeKey={isFilterOpen ? ['filter'] : []}
                 onChange={() => setIsFilterOpen(prev => !prev)}
             />
-
 
             {/* Table */}
 
             <Table<IUser>
                 rowKey='_id'
                 rowSelection={rowSelection}
-                columns={listUserColumns(t)}
+                columns={listUserColumns(t, true, true)}
                 dataSource={listUser}
                 pagination={{
                     current: pagination.current,
@@ -249,9 +229,8 @@ const UserList = () => {
                     x: "max-content",
                 }}
             />
-
         </Space>
-    )
+    );
 }
 
-export default UserList
+export default TrashUserList;

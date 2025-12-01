@@ -28,7 +28,7 @@ interface IModalAction
     onCancel?: () => void;
     onOk?: (...args: any[]) => void;
     danger?: boolean;
-    type?: "default" | "delete";
+    type?: "default" | "delete" | "restore";
     confirmLoading?: boolean;
     trigger?: ReactElement<{ onClick?: () => void }>;
     formId?: string;

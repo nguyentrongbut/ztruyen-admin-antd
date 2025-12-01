@@ -15,6 +15,11 @@ export const CONFIG_API = {
         EXPORT: 'users/export',
         EXPORT_TEMPLATE: 'users/template',
         IMPORT: 'users/import',
+        TRASH: 'users/trash',
+        HARD_DELETE: 'users/trash/delete',
+        HARD_DELETE_MULTI: 'users/trash/delete-multi',
+        RESTORE: 'users/restore',
+        RESTORE_MULTI: 'users/restore-multi',
     },
     UPLOAD: {
         ONE: '/upload-telegram/upload',

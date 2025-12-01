@@ -27,6 +27,7 @@ export const filterGroup = (
     resetSignal: number,
     setResetSignal: Dispatch<SetStateAction<number>>,
     colorPrimary: string,
+    isDeletedAt?: boolean,
 ) => {
     const {Text, Title} = Typography;
 
@@ -189,7 +190,7 @@ export const filterGroup = (
                             <Col xs={24} lg={12}>
                                 <Space direction="vertical" size={8} style={{ width: "100%" }}>
                                     <Text strong type="secondary" className='fz-13'>
-                                        {t('user.filter.updatedAt')}
+                                        {isDeletedAt ? t('user.filter.deletedAt') : t('user.filter.updatedAt')}
                                     </Text>
                                     <RangeFilter<typeof queryParams>
                                         field="updatedAt"

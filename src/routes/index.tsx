@@ -12,6 +12,7 @@ import Login from "@/pages/login";
 import Dashboard from "@/pages/dashboard";
 import ForbiddenPage from "@/pages/403";
 import UserList from "@/pages/users/list";
+import TrashUserList from "@/pages/users/trash";
 
 const AppRoutes = () => {
     return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
                 >
                     <Route index path="/" element={<Dashboard/>}/>
                     <Route index path="/users" element={<UserList/>}/>
+                    <Route index path="/users/trash" element={<TrashUserList/>}/>
                 </Route>
 
                 <Route path='/login' element={<Login/>}/>

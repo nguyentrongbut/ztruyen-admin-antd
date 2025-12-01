@@ -23,6 +23,7 @@
       "title": "Users",
       "list": "User List",
       "trash": "Recycle Bin",
+      "list_trash": "Deleted Users",
       "reports": "User Reports"
     },
     "stories": {
@@ -65,6 +66,7 @@
       "provider": "Provider",
       "createdAt": "Created At",
       "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
       "action": "Action",
       "notSet": "Not set",
       "password": "Password"
@@ -99,6 +101,7 @@
       "provider": "Filter by provider",
       "createdAt": "Filter by created date",
       "updatedAt": "Filter by updated date",
+      "deletedAt": "Filter by deleted date",
       "choose": {
         "gender": "Select gender",
         "role": "Select role",
@@ -116,14 +119,26 @@
     "delete": {
       "title": "Are you sure you want to delete this user",
       "desc": "This action can be undone. The user's data will be deleted from the user's side.",
+      "hard_desc": "This action cannot be undone. All data related to the user will be permanently deleted from the system and cannot be recovered.",
       "deleted_success": "Deleted successfully.",
       "deleted_fail": "Delete failed. Please try again."
     },
     "delete_multi": {
       "title": "Are you sure you want to delete multiple users?",
       "desc": "This action cannot be undone. The data of multiple users will be permanently removed on the user side.",
+      "hard_desc": "This action cannot be undone. All data related to the user will be permanently deleted from the system and cannot be recovered.",
       "deleted_success": "Successfully deleted multiple users.",
       "deleted_fail": "Failed to delete multiple users. Please try again."
+    },
+    "restore": {
+      "title": "Are you sure you want to restore user",
+      "desc": "The user will be restored to active status and can access the system again.",
+      "restored_success": "User restored successfully."
+    },
+    "restore_multi": {
+      "title": "Are you sure you want to restore multiple users?",
+      "desc": "The selected users will be restored to active status and will be able to access the system again.",
+      "restored_success": "Users restored successfully."
     },
     "placeholder": {
       "name": "Enter full name",
@@ -155,6 +170,7 @@
     "export": "Export Data",
     "import": "Import Data",
     "delete_selected": "Multi Delete",
+    "restore_selected": "Multi Restore",
     "filter_options": "Filter Options",
     "basic_filters": "Basic Filters",
     "advanced_filters": "Advanced Filters",
