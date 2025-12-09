@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {keepPreviousData, useQuery} from "@tanstack/react-query";
 
 // ** Services
-import {UserService} from "@/services/user";
+import {GenreService} from "@/services/genre";
 
 // ** i18n
 import {useTranslation} from "react-i18next";
@@ -17,10 +17,11 @@ import {App, Breadcrumb, Button, Col, Collapse, Row, Space, Table, theme, Typogr
 import styles from "@/pages/users/list/list.user.module.scss"
 
 // ** columns
-import {listUserColumns} from "@/pages/users/components/columns";
+import {listGenreColumns} from "@/pages/genres/components/columns";
 
 // ** Types
-import type {IUser} from "@/types/backend";
+import type {IGenre} from "@/types/backend";
+import type {IGenreQueryParams} from "@/pages/genres/list";
 
 // ** Query string
 import qs from "query-string";
@@ -33,43 +34,18 @@ import {useTableSelection} from "@/hooks/useTableSelection.ts";
 import clsx from "clsx";
 
 // ** Icon
-import {ExportOutlined, ReloadOutlined} from "@ant-design/icons";
+import {ReloadOutlined} from "@ant-design/icons";
 
 // ** Page Components
-import {filterGroup} from "@/pages/users/components/filter-group";
-import {searchGroup} from "@/pages/users/components/search-group";
-import CreateUser from "@/pages/users/create";
+import {searchGroup} from "@/pages/genres/components/search-group";
+import {filterGroup} from "@/pages/genres/components/filter-group";
 
 // ** Components
 import DeleteRestoreMultiActions from "@/components/common/delete-restore-multi-actions";
-import ImportData from "@/components/common/import-data";
-
-// ** utils
-import {userFieldMappings} from "@/utils/excelMapping.ts";
 
 const {Title} = Typography;
 
-export interface IUserQueryParams {
-    page: number;
-    limit: number;
-    name: string;
-    email: string;
-    sort: string;
-    role: string;
-    gender: string;
-    provider: string;
-    age: string;
-    createdAt: string;
-    updatedAt: string;
-
-    // filter range
-    "createdAt>"?: string;
-    "updatedAt>"?: string;
-    "age>"?: string;
-}
-
-const UserList = () => {
-
+const TrashGenreList = () => {
     const {t} = useTranslation();
 
     const {notification} = App.useApp()
@@ -80,18 +56,13 @@ const UserList = () => {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(true);
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
     const [resetSignal, setResetSignal] = useState(Date.now());
-    const [loadingExport, setLoadingExport] = useState(false);
 
-    const {queryParams, handleTableChange, setQueryParams} = useTableQueryParams<IUser, IUserQueryParams>({
+    const {queryParams, handleTableChange, setQueryParams} = useTableQueryParams<IGenre, IGenreQueryParams>({
         page: 1,
         limit: 10,
         sort: "-createdAt",
         name: "",
-        email: "",
-        role: "",
-        gender: "",
-        provider: "",
-        age: "",
+        description: "",
         createdAt: "",
         updatedAt: ""
     });
@@ -100,18 +71,18 @@ const UserList = () => {
 
     //  call api
     const {data} = useQuery({
-        queryKey: ["getListUser", queryParams],
+        queryKey: ["getListTrashGenre", queryParams],
         queryFn: () =>
-            UserService.list(query),
+            GenreService.listTrash(query),
         placeholderData: keepPreviousData,
         retry: false,
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
     });
 
-    const listUser = data?.data?.result
+    const listGenre = data?.data?.result
 
-    const {rowSelection, selectedRowKeys, setSelectedRowKeys} = useTableSelection<IUser>(listUser);
+    const {rowSelection, selectedRowKeys, setSelectedRowKeys} = useTableSelection<IGenre>(listGenre);
 
     const meta = data?.data?.meta ?? {page: 1, limit: 10, totalItems: 0};
 
@@ -141,11 +112,7 @@ const UserList = () => {
             limit: 10,
             sort: "-createdAt",
             name: "",
-            email: "",
-            role: "",
-            gender: "",
-            provider: "",
-            age: "",
+            description: "",
             createdAt: "",
             updatedAt: "",
         });
@@ -153,28 +120,17 @@ const UserList = () => {
         setResetSignal(Date.now());
     };
 
-    const handleExport = async () => {
-        setLoadingExport(true);
-        try {
-            await UserService.export(query);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoadingExport(false);
-        }
-    };
-
     return (
         <Space direction='vertical' size={24} className='w-full'>
             {/* Header */}
             <Breadcrumb
-                items={[{title: t('menu.users.title')}, {title: t('menu.users.list')}]}
+                items={[{title: t('menu.genres.title')}, {title: t('menu.genres.list_trash')}]}
             />
             <Row justify="space-between" align="middle" gutter={[16, 16]}>
                 {/* Title */}
                 <Col>
                     <Title className={clsx(styles.title, styles.wrapper)} style={{margin: 0}}>
-                        {t('menu.users.list')}
+                        {t('menu.genres.list_trash')}
                     </Title>
                 </Col>
 
@@ -186,26 +142,18 @@ const UserList = () => {
                                 {t("table.refresh")}
                             </Button>
                         </Col>
-                        <Col>
-                            <Button
-                                icon={<ExportOutlined/>}
-                                onClick={handleExport}
-                                loading={loadingExport}
-                                disabled={loadingExport}
-                            >
-                                {t("table.export")}
-                            </Button>
-                        </Col>
 
                         <Col>
-                            <ImportData
+                            <DeleteRestoreMultiActions
                                 t={t}
-                                queryKey={['getListUser']}
-                                fieldMappings={userFieldMappings}
-                                apiImport={UserService.import}
-                                apiExportTemplate={UserService.exportTemplate}
-                                columnsTable={listUserColumns(t, false)}
-                                messageSuccess={t("user.create.created_success")}
+                                ids={selectedRowKeys as string[]}
+                                onClearSelection={() => setSelectedRowKeys([])}
+                                api={GenreService.restoreMulti}
+                                queryKey={['getListTrashGenre']}
+                                title={t("genre.restore_multi.title")}
+                                desc={t("genre.restore_multi.desc")}
+                                messageSuccess={t("genre.restore_multi.deleted_success")}
+                                action='restore'
                             />
                         </Col>
 
@@ -214,15 +162,12 @@ const UserList = () => {
                                 t={t}
                                 ids={selectedRowKeys as string[]}
                                 onClearSelection={() => setSelectedRowKeys([])}
-                                api={UserService.removeMulti}
-                                queryKey={['getListUser']}
-                                title={t("user.delete_multi.title")}
-                                desc={t("user.delete_multi.desc")}
-                                messageSuccess={t("user.delete_multi.deleted_success")}
+                                api={GenreService.hardRemoveMulti}
+                                queryKey={['getListTrashGenre']}
+                                title={t("genre.delete_multi.title")}
+                                desc={t("genre.delete_multi.hard_desc")}
+                                messageSuccess={t("genre.delete_multi.deleted_success")}
                             />
-                        </Col>
-                        <Col>
-                            <CreateUser t={t}/>
                         </Col>
                     </Row>
                 </Col>
@@ -245,17 +190,17 @@ const UserList = () => {
 
             {/* Table */}
 
-            <Table<IUser>
+            <Table<IGenre>
                 rowKey='_id'
                 rowSelection={rowSelection}
-                columns={listUserColumns(t)}
-                dataSource={listUser}
+                columns={listGenreColumns(t, true, true)}
+                dataSource={listGenre}
                 pagination={{
                     current: pagination.current,
                     pageSize: pagination.pageSize,
                     total: pagination.total,
                     showTotal: (total, range) =>
-                        `${range[0]} - ${range[1]} ${t('table.of')} ${total} ${t('menu.users.title').toLowerCase()}`,
+                        `${range[0]} - ${range[1]} ${t('table.of')} ${total} ${t('menu.genres.title').toLowerCase()}`,
                     showSizeChanger: true,
                 }}
                 onChange={handleTableChange}
@@ -269,4 +214,4 @@ const UserList = () => {
     )
 }
 
-export default UserList
+export default TrashGenreList

@@ -14,7 +14,7 @@ import {
     CommentOutlined,
     DashboardOutlined,
     HeartOutlined,
-    SettingOutlined,
+    SettingOutlined, TagsOutlined,
     UserOutlined,
     WarningOutlined,
 } from "@ant-design/icons";
@@ -36,8 +36,16 @@ const useMenuItems = (): MenuItem[] => {
             label: t("menu.users.title"),
             children: [
                 { key: "/users", label: <Link to="/users">{t("menu.users.list")}</Link> },
-                { key: "/users/trash", label: <Link to="/users/trash">{t("menu.users.trash")}</Link> },
-                { key: "/users/reports", label: <Link to="/users/reports">{t("menu.users.reports")}</Link> },
+                { key: "/users/trash", label: <Link to="/users/trash">{t("menu.users.trash")}</Link> }
+            ],
+        },
+        {
+            key: "genres",
+            icon: <TagsOutlined />,
+            label: t("menu.genres.title"),
+            children: [
+                { key: "/genres", label: <Link to="/genres">{t("menu.genres.list")}</Link> },
+                { key: "/genres/trash", label: <Link to="/genres/trash">{t("menu.genres.trash")}</Link> }
             ],
         },
         {
@@ -47,7 +55,6 @@ const useMenuItems = (): MenuItem[] => {
             children: [
                 { key: "/stories", label: <Link to="/stories">{t("menu.stories.list")}</Link> },
                 { key: "/stories/pending", label: <Link to="/stories/pending">{t("menu.stories.pending")}</Link> },
-                { key: "/genres", label: <Link to="/genres">{t("menu.stories.genres")}</Link> },
                 { key: "/stories/trash", label: <Link to="/stories/trash">{t("menu.stories.trash")}</Link> },
             ],
         },

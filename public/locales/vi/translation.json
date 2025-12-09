@@ -26,11 +26,16 @@
       "list_trash": "Danh sách người dùng đã xoá",
       "reports": "Báo cáo người dùng"
     },
+    "genres": {
+      "title": "Thể loại",
+      "list": "Danh sách thể loại",
+      "list_trash": "Danh sách thể loại đã xoá",
+      "trash": "Thùng rác"
+    },
     "stories": {
       "title": "Truyện",
       "list": "Danh sách truyện",
       "pending": "Duyệt truyện mới",
-      "genres": "Thể loại",
       "trash": "Thùng rác"
     },
     "chapters": {
@@ -159,7 +164,53 @@
       "roleRequired": "Vui lòng chọn vai trò"
     }
   },
+  "genre": {
+    "columns": {
+      "name": "Tên",
+      "description": "Mô tả",
+      "slug": "Slug"
+    },
+    "search": {
+      "name": "Tìm kiếm theo tên thể loại",
+      "description": "Tìm kiếm theo mô tả",
+      "choose": {
+        "name": "Nhập tên thể loại",
+        "description": "Nhập mô tả"
+      }
+    },
+    "delete": {
+      "title": "Bạn có chắc chắn muốn xóa thể loại",
+      "desc": "Hành động này có thể hoàn tác. Dữ liệu của thể loại sẽ bị xóa ở phía người dùng.",
+      "hard_desc": "Hành động này không thể hoàn tác. Tất cả dữ liệu liên quan đến thể loại sẽ bị xóa khỏi hệ thống và không thể phục hồi.",
+      "deleted_success": "Xóa thể loại thành công."
+    },
+    "delete_multi": {
+      "title": "Bạn có chắc chắn muốn xóa nhiều thể loại không?",
+      "desc": "Hành động này có thể hoàn tác. Dữ liệu của các thể loại sẽ bị xóa ở phía người dùng.",
+      "hard_desc": "Hành động này không thể hoàn tác. Tất cả dữ liệu liên quan đến các thể loại sẽ bị xóa khỏi hệ thống và không thể khôi phục.",
+      "deleted_success": "Xóa nhiều thể loại thành công."
+    },
+    "restore": {
+      "title": "Bạn có chắc chắn muốn khôi phục thể loại",
+      "desc": "Thể loại sẽ được khôi phục và xuất hiện trở lại trong hệ thống.",
+      "restored_success": "Khôi phục thể loại thành công."
+    },
+    "restore_multi": {
+      "title": "Bạn có chắc chắn muốn khôi phục nhiều thể loại?",
+      "desc": "Các thể loại đã chọn sẽ được khôi phục và xuất hiện trở lại trong hệ thống.",
+      "restored_success": "Khôi phục nhiều thể loại thành công."
+    },
+    "placeholder": {
+      "name": "Nhập tên thể loại",
+      "description": "Nhập mô tả thể loại"
+    },
+    "create": {
+      "title": "Thêm thể loại",
+      "created_success": "Tạo thể loại thành công."
+    }
+  },
   "table": {
+    "actions": "Thao tác",
     "delete": "Xóa",
     "ok": "Xác nhận",
     "cancel": "Huỷ",

@@ -5,6 +5,11 @@ export const CONFIG_API = {
         LOGIN: 'auth/login',
         LOGOUT: 'auth/logout',
     },
+    UPLOAD: {
+        ONE: '/upload-telegram/upload',
+        MULTI: '/upload-telegram/upload-multiple',
+        IMAGE: '/images'
+    },
     USER: {
         INDEX: 'users',
         PROFILE: 'users/profile',
@@ -21,9 +26,19 @@ export const CONFIG_API = {
         RESTORE: 'users/restore',
         RESTORE_MULTI: 'users/restore-multi',
     },
-    UPLOAD: {
-        ONE: '/upload-telegram/upload',
-        MULTI: '/upload-telegram/upload-multiple',
-        IMAGE: '/images'
-    }
+   GENRE: {
+        INDEX: 'genres',
+        DETAIL: 'genres/detail',
+        DELETE: 'genres/delete',
+        DELETE_MULTI: 'genres/delete-multi',
+        UPDATE: 'genres/update',
+        EXPORT: 'genres/export',
+        EXPORT_TEMPLATE: 'genres/template',
+        IMPORT: 'genres/import',
+        TRASH: 'genres/trash',
+        HARD_DELETE: 'genres/trash/delete',
+        HARD_DELETE_MULTI: 'genres/trash/delete-multi',
+        RESTORE: 'genres/restore',
+        RESTORE_MULTI: 'genres/restore-multi',
+   }
 } as const

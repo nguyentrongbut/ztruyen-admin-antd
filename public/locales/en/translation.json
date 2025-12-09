@@ -26,11 +26,16 @@
       "list_trash": "Deleted Users",
       "reports": "User Reports"
     },
+    "genres": {
+      "title": "Genres",
+      "list": "Genre List",
+      "list_trash": "Deleted Genres",
+      "trash": "Recycle Bin"
+    },
     "stories": {
       "title": "Stories",
       "list": "Story List",
       "pending": "Pending Approval",
-      "genres": "Genres",
       "trash": "Recycle Bin"
     },
     "chapters": {
@@ -159,7 +164,53 @@
       "roleRequired": "Please select a role"
     }
   },
+  "genre": {
+    "columns": {
+      "name": "Name",
+      "description": "Description",
+      "slug": "Slug"
+    },
+    "search": {
+      "name": "Search by genre name",
+      "description": "Search by description",
+      "choose": {
+        "name": "Enter genre name",
+        "description": "Enter description"
+      }
+    },
+    "delete": {
+      "title": "Are you sure you want to delete this genre?",
+      "desc": "This action can be undone. The genre data will be removed from the user side.",
+      "hard_desc": "This action cannot be undone. All data related to this genre will be permanently removed from the system and cannot be recovered.",
+      "deleted_success": "Genre deleted successfully."
+    },
+    "delete_multi": {
+      "title": "Are you sure you want to delete multiple genres?",
+      "desc": "This action can be undone. The selected genres' data will be removed from the user side.",
+      "hard_desc": "This action cannot be undone. All data related to the selected genres will be permanently removed from the system and cannot be recovered.",
+      "deleted_success": "Multiple genres deleted successfully."
+    },
+    "restore": {
+      "title": "Are you sure you want to restore this genre?",
+      "desc": "The genre will be restored and will appear again in the system.",
+      "restored_success": "Genre restored successfully."
+    },
+    "restore_multi": {
+      "title": "Are you sure you want to restore multiple genres?",
+      "desc": "The selected genres will be restored and will appear again in the system.",
+      "restored_success": "Multiple genres restored successfully."
+    },
+    "placeholder": {
+      "name": "Enter genre name",
+      "description": "Enter genre description"
+    },
+    "create": {
+      "title": "Add Genre",
+      "created_success": "Genre created successfully."
+    }
+  },
   "table": {
+    "actions": "Actions",
     "delete": "Delete",
     "ok": "Confirm",
     "cancel": "Cancel",

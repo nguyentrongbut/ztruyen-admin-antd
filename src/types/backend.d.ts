@@ -1,3 +1,19 @@
+export interface IUpload {
+    "_id": string,
+    "slug": string,
+    "fileId": string,
+    "isDeleted": boolean,
+    "deletedAt": string,
+    "createdAt": string,
+    "updatedAt": string,
+}
+
+export interface IRemoveMultiImg {
+    "success": boolean,
+    "deletedCount": number,
+    "slugs": string[],
+}
+
 export interface IUserLogin {
     _id?: string;
     name: string;
@@ -9,7 +25,6 @@ export interface ILogin {
     access_token: string;
     user: IUserLogin
 }
-
 
 export interface IUser {
     _id?: string;
@@ -32,18 +47,14 @@ export interface IUser {
     updatedAt?: string;
 }
 
-export interface IUpload {
-    "_id": string,
-    "slug": string,
-    "fileId": string,
-    "isDeleted": boolean,
-    "deletedAt": string,
-    "createdAt": string,
-    "updatedAt": string,
+export interface IGenre {
+    _id?: string;
+    name: string;
+    slug?: string;
+    description?: string;
+    isDeleted?: boolean;
+    deletedAt?: boolean | null;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
-export interface IRemoveMultiImg {
-    "success": boolean,
-    "deletedCount": number,
-    "slugs": string[],
-}
