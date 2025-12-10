@@ -127,7 +127,7 @@ export const listUserColumns = (
                                 t={t} name={record?.name}
                                 title={t("user.restore.title")}
                                 desc={t("user.restore.desc")}
-                                messageSuccess={t("user.delete.deleted_success")}
+                                messageSuccess={t("user.restore.restored_success")}
                                 api={UserService.restore}
                                 queryKey={["getListTrashUser"]}
                                 action='restore'

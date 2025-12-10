@@ -173,7 +173,7 @@ const TrashUserList = () => {
                                 queryKey={['getListTrashUser']}
                                 title={t("user.restore_multi.title")}
                                 desc={t("user.restore_multi.desc")}
-                                messageSuccess={t("user.restore_multi.deleted_success")}
+                                messageSuccess={t("user.restore_multi.restored_success")}
                                 action='restore'
                             />
                         </Col>

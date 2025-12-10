@@ -152,7 +152,7 @@ const TrashGenreList = () => {
                                 queryKey={['getListTrashGenre']}
                                 title={t("genre.restore_multi.title")}
                                 desc={t("genre.restore_multi.desc")}
-                                messageSuccess={t("genre.restore_multi.deleted_success")}
+                                messageSuccess={t("genre.restore_multi.restored_success")}
                                 action='restore'
                             />
                         </Col>

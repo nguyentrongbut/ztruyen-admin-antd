@@ -80,7 +80,7 @@ export const listGenreColumns = (
                                 t={t} name={record?.name}
                                 title={t("genre.restore.title")}
                                 desc={t("genre.restore.desc")}
-                                messageSuccess={t("genre.delete.deleted_success")}
+                                messageSuccess={t("genre.restore.restored_success")}
                                 api={GenreService.restore}
                                 queryKey={["getListTrashGenre"]}
                                 action='restore'
